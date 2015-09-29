@@ -1,0 +1,12 @@
+.footer {
+    text-align: center;
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    height: 30px; /*脚部的高度*/
+    clear: both;
+}
+
+.error-span {
+    margin-top: 30px;
+}
