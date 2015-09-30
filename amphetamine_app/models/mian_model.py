@@ -19,9 +19,9 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 
 
-class Anphetamine(db.Model):
+class Amphetamine(db.Model):
 
-    __tablename__ = 'anphetamine'
+    __tablename__ = 'amphetamine'
 
     ActionType = common.ActionType
 
@@ -38,3 +38,6 @@ class Anphetamine(db.Model):
     is_enable = db.Column(db.Boolean, default=True)
     is_passed = db.Column(db.Boolean, default=False)
     modify_time = db.Column(db.DateTime, default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+    def __repr__(self):
+        return "<Amphetamine  %r %r %r %r>" % (self.id, self.page_key, self.page_value, self.element)

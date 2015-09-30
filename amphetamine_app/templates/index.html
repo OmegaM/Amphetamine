@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="page-header">
-        <h1 class="text-info">Amphetamine <small>FSO Automation</small></h1>
+        <h1 class="text-info">Amphetamine
+            <small>FSO Automation</small>
+        </h1>
     </div>
 
     <div class="row">
@@ -10,12 +12,12 @@
         <div class="col-md-12">
 
 
-            <form role="form" class="form-inline" action="add_case" method="POST">
+            <form role="form" class="form-inline" action="/add_case" method="POST">
                 {{ form.hidden_tag() }}
                 <div class="form-group">
-                    <br>{{ form.page_value(class='form-control', placeholder='值') }}
+                    <br>{{ form.page_key(class='form-control', placeholder='键') }}
                 </div>
-                {% for error in form.page_value.errors %}
+                {% for error in form.page_key.errors %}
                     <span class="text-danger">{{ error }}</span>
                 {% endfor %}
                 <div class="form-group">
@@ -60,10 +62,89 @@
                 {% for error in form.branch.errors %}
                     <span class="text-danger">{{ error }}</span>
                 {% endfor %}
+                <div class="form-group">
+                    <br>
+                    <button class="btn btn-primary" type="submit">提交</button>
+                </div>
+                <div class="form-group">
+                    <br>
+                    <button class="btn btn-danger" type="reset">重置</button>
+                </div>
+
 
             </form>
             <br>
-            <p>this is .</p>
+
+            <div>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <br>
+                            <div class="alert alert-success">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <!--begin-->
+            <br>
+
+            <div>
+                {% if amphetamine_list %}
+                <table class="table table-hover table-condensed">
+                    <caption>CaseList</caption>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>键</th>
+                        <th>值</th>
+                        <th>元素</th>
+                        <th>子项</th>
+                        <th>子项描述</th>
+                        <th>父项</th>
+                        <th>父项描述</th>
+                        <th>顺序</th>
+                        <th>动作</th>
+                        <th>启用</th>
+                        <th>通过</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for amp in amphetamine_list %}
+                        <tr>
+                            <th scope="row">{{ amp.id }}</th>
+                            <td>{{ amp.page_key }}</td>
+                            <td>{{ amp.page_value }}</td>
+                            <td>{{ amp.element }}</td>
+                            <td>{{ amp.child }}</td>
+                            <td>{{ amp.child_desc }}</td>
+                            <td>{{ amp.parent }}</td>
+                            <td>{{ amp.parent_desc }}</td>
+                            <td>{{ amp.branch }}</td>
+                            <td>{{ amp.action }}</td>
+                            {% if amp.is_enable %}
+                                <td><a href="/update_case_enable/{{ amp.id }}" role="button" class="btn btn-success btn-xs">{{ amp.is_enable }}</a></td>
+                            {% else %}
+                                <td><a href="/update_case_enable/{{ amp.id }}" role="button" class="btn btn-info btn-xs">{{ amp.is_enable }}</a></td>
+                            {% endif %}
+                            <td>{{ amp.is_passed }}</td>
+                            <td><a href="/delete_case/{{ amp.id }}" role="button" class="btn btn-danger btn-xs">delete</a></td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                    <p>No any TestCase in here.</p>
+            {% endif %}
+
+            </div>
+
+            <!--end-->
 
         </div>
 

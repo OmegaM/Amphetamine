@@ -12,9 +12,9 @@
 
 
 class Config(object):
-    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_ECHO = True
     CSRF_ENABLED = True
-    SECRET_KEY = 'you-will-never-guess'
+    SECRET_KEY = 'you-will-never-guesses'
 
     def __init__(self):
         pass
@@ -22,12 +22,12 @@ class Config(object):
 
 class DevConfig(Config):
 
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost/amphetamine'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:wxhwbx6666@localhost/amphetamine'
 
 
 class TestConfig(Config):
 
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost/amphetamine'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:wxhwbx6666@localhost/amphetamine'
 
 
 config = {

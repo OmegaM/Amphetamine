@@ -30,7 +30,7 @@ class EditTestCaseForm(Form):
     element = StringField(label='Element',
                           validators=[DataRequired(message=validRequiredMessage),
                                       Length(min=1, max=255, message=validMaxLengthMessage)])
-    child = SelectField(label='Child', choices=[(x, 'C'+str(x)) for x in range(10)], coerce=int)
+    child = SelectField(label='Child', choices=map(lambda x: (x, 'C'+str(x)), [x for x in range(10)]), coerce=int)
     child_desc = StringField(label='ChildDesc',
                              validators=[DataRequired(message=validRequiredMessage),
                                          Length(min=1, max=255, message=validMaxLengthMessage)])
@@ -41,6 +41,6 @@ class EditTestCaseForm(Form):
     branch = IntegerField(label='Branch',
                                validators=[DataRequired(message=validRequiredMessage)])
 
-    action = SelectField(label='Action', choices=[('READ', 'read')])
+    action = SelectField(label='Action', choices=[('READ', 'read'), ('INPUT', 'input'), ('CLICK', 'click')])
 
 
