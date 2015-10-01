@@ -43,13 +43,13 @@ class EditTestCaseForm(Form):
                         validators=[DataRequired(message=validRequiredMessage)])
 
     child = SelectField(label='Child',
-                        choices=map(lambda x: (x, 'C'+str(x)), [x for x in range(10)]), coerce=int)
+                        choices=map(lambda x: (x, 'ChildCategoryLevel'+str(x)), [x for x in range(10)]), coerce=int)
 
     child_desc = StringField(label='ChildDesc',
                              validators=[DataRequired(message=validRequiredMessage),
                                          Length(min=1, max=255, message=validMaxLengthMessage)])
     parent = SelectField(label='Parent',
-                         choices=[(x, 'P'+str(x)) for x in range(10)], coerce=int)
+                         choices=[(x, 'ParentCategoryLevel'+str(x)) for x in range(10)], coerce=int)
     parent_desc = StringField(label='ParentDesc',
                               validators=[DataRequired(message=validRequiredMessage),
                                           Length(min=1, max=255, message=validMaxLengthMessage)])

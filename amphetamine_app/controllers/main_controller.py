@@ -28,6 +28,7 @@ def index():
 @amphetamine_app.route('/add_case', methods=['GET', 'POST'])
 def add_case():
     form = EditTestCaseForm(request.form)
+    amphetamine_list = db.session.query(Amphetamine).order_by(Amphetamine.parent, Amphetamine.id).all()
     if request.method == 'POST':
         if form.validate_on_submit():
             amphetamine = Amphetamine(element_desc=form.element_desc.data,
@@ -54,7 +55,7 @@ def add_case():
                 return redirect(url_for('index'))
         else:
             flash(u"输入的表单含有错误项")
-            return render_template('index.html', form=form)
+            return render_template('index.html', form=form, amphetamine_list=amphetamine_list)
     return redirect(url_for('index'))
 
 

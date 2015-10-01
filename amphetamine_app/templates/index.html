@@ -10,73 +10,80 @@
 
 
         <div class="col-md-12">
+            <br>
 
-
-            <form role="form" class="form-inline" action="/add_case" method="POST">
+            <form id="addTestCaseForm" role="form" class="form-inline form-row" action="/add_case" method="POST">
                 {{ form.hidden_tag() }}
-                <div class="form-group">
-                    <br>{{ form.element_desc(class='form-control', placeholder='描述') }}
-                </div>
-                {% for error in form.element_desc.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                {% endfor %}
-                <div class="form-group">
-                    <br>{{ form.by_element_type(class='form-control') }}
-                </div>
-                <div class="form-group">
-                    <br>{{ form.element_key(class='form-control', placeholder='Exp') }}
-                </div>
-                {% for error in form.element_key.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                {% endfor %}
+                <fieldset>
+                    <legend>关键字</legend>
+                    <div class="form-group"><code>@Case</code></div>
+                    <div class="form-group">
+                        <div>
+                            {{ form.element_desc(class='form-control', placeholder='用例描述') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@FindBy</code></div>
+                    <div class="form-group">
+                        <div>
+                            {{ form.by_element_type(class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            {{ form.element_key(class='form-control', size=35, placeholder='Exp') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@And</code></div>
+                    <div class="form-group">
+                        {{ form.action(class='form-control') }}
+                    </div>
+                    <div class="form-group"><code>@Expect</code></div>
+                    <div class="form-group">
+                        {{ form.element_value(class='form-control', placeholder='预期值') }}
+                    </div>
+
+                </fieldset>
+                <br>
+                <fieldset>
+                    <legend>操作步骤</legend>
+                    <div class="form-group"><code>@Step</code></div>
+                    <div class="form-group">
+                        {{ form.step(class='form-control', size=8, placeholder='操作步骤') }}
+                    </div>
+                </fieldset>
+                <br>
+                <fieldset>
+                    <legend>归属</legend>
+                    <div class="form-group"><code>@Suite</code></div>
+                    <div class="form-group">
+                        {{ form.child(class='form-control') }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.child_desc(class='form-control', placeholder='子模块') }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.parent(class='form-control') }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.parent_desc(class='form-control', placeholder='父模块') }}
+                    </div>
+
+                </fieldset>
+                <br>
+                <fieldset>
+                    <legend>针对于数据</legend>
+                    <div class="form-group"><code>@LineNumber</code></div>
+                    <div class="form-group">
+                        {{ form.row(class='form-control', placeholder='第几条数据') }}
+                    </div>
+                </fieldset>
+                <br>
 
                 <div class="form-group">
-                    <br>{{ form.element_value(class='form-control', placeholder='值') }}
-                </div>
-                {% for error in form.element_value.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                {% endfor %}
-
-                <div class="form-group">
-                    <br>{{ form.action(class='form-control') }}
-                </div>
-                <div class="form-group">
-                    <br>{{ form.step(class='form-control', placeholder='步骤') }}
-                    {% for error in form.step.errors %}
-                        <span class="text-danger">{{ error }}</span>
-                    {% endfor %}
-                </div>
-                <div class="form-group">
-                    <br>{{ form.child(class='form-control') }}
-                </div>
-                <div class="form-group">
-                    <br>{{ form.child_desc(class='form-control', placeholder='子类') }}
-                </div>
-                {% for error in form.child_desc.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                {% endfor %}
-                <div class="form-group">
-                    <br>{{ form.parent(class='form-control') }}
-                </div>
-                <div class="form-group">
-                    <br>{{ form.parent_desc(class='form-control', placeholder='父类') }}
-                </div>
-                {% for error in form.parent_desc.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                {% endfor %}
-                <div class="form-group">
-                    <br>{{ form.row(class='form-control', placeholder='行') }}
-                </div>
-                {% for error in form.row.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                {% endfor %}
-
-                <div class="form-group">
-                    <br>
                     <button class="btn btn-primary" type="submit">提交</button>
                 </div>
                 <div class="form-group">
-                    <br>
                     <button class="btn btn-danger" type="reset">重置</button>
                 </div>
 
@@ -103,7 +110,7 @@
             <div>
                 {% if amphetamine_list %}
                     <table class="table table-hover table-condensed">
-                        <caption>TestCaseList</caption>
+                        <caption>TestCaseList<code>Editable</code></caption>
                         <thead>
                         <tr>
                             <th>#</th>
@@ -131,7 +138,7 @@
                                 <td>{{ amp.by_element_type }}</td>
                                 <td name="element_key" contenteditable="true">{{ amp.element_key }}</td>
                                 <td name="element_value" contenteditable="true">{{ amp.element_value }}</td>
-                                <td >{{ amp.action }}</td>
+                                <td>{{ amp.action }}</td>
                                 <td name="step" contenteditable="true">{{ amp.step }}</td>
                                 <td name="child" contenteditable="true">{{ amp.child }}</td>
                                 <td name="child_desc" contenteditable="true">{{ amp.child_desc }}</td>
