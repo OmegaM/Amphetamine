@@ -126,18 +126,18 @@
                         <tbody>
                         {% for amp in amphetamine_list %}
                             <tr id="tr{{ amp.id }}">
-                                <td scope="row">{{ amp.id }}</td>
-                                <td contenteditable="true">{{ amp.element_desc }}</td>
-                                <td >{{ amp.by_element_type }}</td>
-                                <td contenteditable="true">{{ amp.element_key }}</td>
-                                <td contenteditable="true">{{ amp.element_value }}</td>
+                                <td name="id" scope="row">{{ amp.id }}</td>
+                                <td name="element_desc" contenteditable="true">{{ amp.element_desc }}</td>
+                                <td>{{ amp.by_element_type }}</td>
+                                <td name="element_key" contenteditable="true">{{ amp.element_key }}</td>
+                                <td name="element_value" contenteditable="true">{{ amp.element_value }}</td>
                                 <td >{{ amp.action }}</td>
-                                <td contenteditable="true">{{ amp.step }}</td>
-                                <td contenteditable="true">{{ amp.child }}</td>
-                                <td contenteditable="true">{{ amp.child_desc }}</td>
-                                <td contenteditable="true">{{ amp.parent }}</td>
-                                <td contenteditable="true">{{ amp.parent_desc }}</td>
-                                <td contenteditable="true">{{ amp.row }}</td>
+                                <td name="step" contenteditable="true">{{ amp.step }}</td>
+                                <td name="child" contenteditable="true">{{ amp.child }}</td>
+                                <td name="child_desc" contenteditable="true">{{ amp.child_desc }}</td>
+                                <td name="parent" contenteditable="true">{{ amp.parent }}</td>
+                                <td name="parent_desc" contenteditable="true">{{ amp.parent_desc }}</td>
+                                <td name="row" contenteditable="true">{{ amp.row }}</td>
                                 {% if amp.is_enable %}
                                     <td><a href="/update_case_enable/{{ amp.id }}" role="button"
                                            class="btn btn-success btn-xs">ON</a></td>
@@ -170,5 +170,6 @@
         </div>
 
     </div>
+
     <script src="{{ url_for('static', filename = 'js/updateTestCase.js') }}"></script>
 {% endblock %}

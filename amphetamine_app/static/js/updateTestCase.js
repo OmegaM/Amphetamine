@@ -4,44 +4,40 @@
 
 
 function updateTestCase(obj) {
-    var aArray = {};
+
+    var testCaseObject = Object();
+    //找到绑定了点击事件的按钮的td标签的父级元素的父级元素tr
+    //为表格的一行
     var tr = $(obj).parent().parent();
     var tds = tr.children("td");
-    $(tds).each(function (index) {
-        if (!$(this).find("a").length > 0) {
-            aArray[index] = $(this).text();
+    $(tds).each(function () {
+        //过滤掉td子元素中含有a标签和没有name属性的标签
+        //this相当于each中的每一项的标签元素
+        if (!$(this).find("a").length > 0 && $(this).attr("name")) {
+            //取td的name属性的值作为testCaseObject的键,Html的内容作为其值
+            testCaseObject[$(this).attr("name")] = $(this).text();
         }
     });
-    //console.log(aArray);
-    var testCaseObj = $.parseJSON('{' +
-        '"id": "' + aArray[0] + '",' +
-        '"element_desc": "' + aArray[1] + '", ' +
-        '"element_key": "' + aArray[3] + '", ' +
-        '"element_value": "' + aArray[4] + '", ' +
-        '"step": "' + aArray[6] + '", ' +
-        '"child": "' + aArray[7] + '", ' +
-        '"child_desc": "' + aArray[8] + '", ' +
-        '"parent": "' + aArray[9] + '", ' +
-        '"parent_desc": "' + aArray[10] + '", ' +
-        '"row": "' + aArray[11] + '"' +
-        '}');
-    //console.log(testCaseObj);
-    $.post('/update_test_case', testCaseObj, function (results) {
-        console.log(results.messages);
 
+    //console.log(testCaseObject);
+
+    $.post('/update_test_case', testCaseObject, function (results) {
+        //console.log(results.messages);
+        //警告框HTML代码
         var flashDivBegin = '<div class="alert alert-success alert-dismissible fade in">' +
             '<button type="button" class="close" data-dismiss="alert">&times;</button>';
-
         var flashDivEnd = '</div>';
+        //警告框div对象
+        var flashMessageObj = $("#flash_message");
 
-        if (results.status == "success"){
-            $("#flash_message").append(
-            flashDivBegin +
-            results.messages + flashDivEnd);
+        if (results.status == "success") {
+            flashMessageObj.append(
+                flashDivBegin +
+                results.messages + flashDivEnd);
         } else {
-            $("#flash_message").append(
-            flashDivBegin +
-            results.messages + flashDivEnd);
+            flashMessageObj.append(
+                flashDivBegin +
+                results.messages + flashDivEnd);
         }
     });
     return false;

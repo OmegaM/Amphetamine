@@ -42,20 +42,24 @@ def add_case():
                                       parent_desc=form.parent_desc.data,
                                       row=form.row.data
                                       )
-            db.session.add(amphetamine)
-            db.session.commit()
-            flash(u"用例添加成功")
-            return redirect(url_for('index'))
+            try:
+                db.session.add(amphetamine)
+                db.session.commit()
+                flash(u"用例添加成功")
+                return redirect(url_for('index'))
+            except Exception, e:
+                logger.error("add testcase failed : " + e.message)
+                db.session.rollback();
+                flash(u"用例添加失败")
+                return redirect(url_for('index'))
         else:
-            flash(u"用例添加失败")
+            flash(u"输入的表单含有错误项")
             return render_template('index.html', form=form)
-    else:
-        return redirect(url_for('index'))
+    return redirect(url_for('index'))
 
 
 @amphetamine_app.route('/update_case_enable/<int:id>', methods=['GET'])
 def update_case_enable(id):
-
     if request.method == 'GET':
         try:
             case = db.session.query(Amphetamine).get(id)
@@ -64,7 +68,7 @@ def update_case_enable(id):
             flash(u"用例状态修改成功")
             return redirect(url_for('index'))
         except Exception, e:
-            logger.debug("update case failed : " + e.message)
+            logger.error("update testcase status failed : " + e.message)
             db.session.rollback()
             flash(u"用例状态修改失败")
             return redirect(url_for('index'))
@@ -74,6 +78,7 @@ def update_case_enable(id):
 @amphetamine_app.route('/update_test_case', methods=['POST'])
 def update_test_case():
     if request.method == 'POST':
+        print request.form.items()
         testCaseDict = amphetamineUtils.jsListToPythonDict(request.form.items())
         try:
             testcase = db.session.query(Amphetamine).get(testCaseDict.get('id'))
@@ -89,7 +94,7 @@ def update_test_case():
             db.session.commit()
             return jsonify(status='success', messages=u'用例更新成功')
         except Exception, e:
-            logger.error("update testcase has error : " + e.message)
+            logger.error("modify testcase failed : " + e.message)
             db.session.rollback()
             return jsonify(status='fail', messages=u'用例更新失败')
     return redirect(url_for('index'))
@@ -97,15 +102,16 @@ def update_test_case():
 
 @amphetamine_app.route('/delete_case/<int:id>', methods=['GET'])
 def delete_case(id):
-
     if request.method == 'GET':
         try:
             case = db.session.query(Amphetamine).get(id)
             db.session.delete(case)
             db.session.commit()
-            flash(u"删除成功")
+            flash(u"删除用例成功")
             return redirect(url_for('index'))
         except Exception, e:
-            logger.debug("delete case failed : " + e.message)
+            logger.debug("delete testcase failed : " + e.message)
             db.session.rollback()
+            lash(u"删除用例失败")
+            return redirect(url_for('index'))
     return redirect(url_for('index'))
