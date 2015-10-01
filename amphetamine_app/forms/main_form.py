@@ -21,26 +21,41 @@ class EditTestCaseForm(Form):
     validRequiredMessage = u"该字段为必填项"
     validMaxLengthMessage = u"超过了255个字符"
 
-    page_key = StringField(label='PageKey',
+    element_desc = StringField(label='ElementDesc',
                            validators=[DataRequired(message=validRequiredMessage),
                                        Length(min=1, max=255, message=validMaxLengthMessage)])
-    page_value = StringField(label='PageValue',
+
+    element_key = StringField(label='ElementKey',
+                              validators=[DataRequired(message=validRequiredMessage),
+                                       Length(min=1, max=255, message=validMaxLengthMessage)])
+
+    element_value = StringField(label='ElementValue',
                              validators=[DataRequired(message=validRequiredMessage),
                                          Length(min=1, max=255, message=validMaxLengthMessage)])
-    element = StringField(label='Element',
-                          validators=[DataRequired(message=validRequiredMessage),
-                                      Length(min=1, max=255, message=validMaxLengthMessage)])
-    child = SelectField(label='Child', choices=map(lambda x: (x, 'C'+str(x)), [x for x in range(10)]), coerce=int)
+
+    by_element_type = SelectField(label='ByElementType',
+                                  choices=[('XPATH', 'xpath'), ('ID', 'id'), ('NAME', 'name')])
+
+    action = SelectField(label='Action',
+                         choices=[('READ', 'read'), ('INPUT', 'input'), ('CLICK', 'click')])
+
+    step = IntegerField(label='Step',
+                        validators=[DataRequired(message=validRequiredMessage)])
+
+    child = SelectField(label='Child',
+                        choices=map(lambda x: (x, 'C'+str(x)), [x for x in range(10)]), coerce=int)
+
     child_desc = StringField(label='ChildDesc',
                              validators=[DataRequired(message=validRequiredMessage),
                                          Length(min=1, max=255, message=validMaxLengthMessage)])
-    parent = SelectField(label='Parent', choices=[(x, 'P'+str(x)) for x in range(10)], coerce=int)
+    parent = SelectField(label='Parent',
+                         choices=[(x, 'P'+str(x)) for x in range(10)], coerce=int)
     parent_desc = StringField(label='ParentDesc',
                               validators=[DataRequired(message=validRequiredMessage),
                                           Length(min=1, max=255, message=validMaxLengthMessage)])
-    branch = IntegerField(label='Branch',
-                               validators=[DataRequired(message=validRequiredMessage)])
+    row = IntegerField(label='Row',
+                       validators=[DataRequired(message=validRequiredMessage)])
 
-    action = SelectField(label='Action', choices=[('READ', 'read'), ('INPUT', 'input'), ('CLICK', 'click')])
+
 
 

@@ -15,28 +15,42 @@
             <form role="form" class="form-inline" action="/add_case" method="POST">
                 {{ form.hidden_tag() }}
                 <div class="form-group">
-                    <br>{{ form.page_key(class='form-control', placeholder='键') }}
+                    <br>{{ form.element_desc(class='form-control', placeholder='描述') }}
                 </div>
-                {% for error in form.page_key.errors %}
+                {% for error in form.element_desc.errors %}
                     <span class="text-danger">{{ error }}</span>
                 {% endfor %}
                 <div class="form-group">
-                    <br>{{ form.page_value(class='form-control', placeholder='值') }}
+                    <br>{{ form.by_element_type(class='form-control') }}
                 </div>
-                {% for error in form.page_value.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                {% endfor %}
                 <div class="form-group">
-                    <br>{{ form.element(class='form-control', placeholder='元素') }}
+                    <br>{{ form.element_key(class='form-control', placeholder='Exp') }}
                 </div>
-                {% for error in form.element.errors %}
+                {% for error in form.element_key.errors %}
                     <span class="text-danger">{{ error }}</span>
                 {% endfor %}
+
+                <div class="form-group">
+                    <br>{{ form.element_value(class='form-control', placeholder='值') }}
+                </div>
+                {% for error in form.element_value.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+
+                <div class="form-group">
+                    <br>{{ form.action(class='form-control') }}
+                </div>
+                <div class="form-group">
+                    <br>{{ form.step(class='form-control', placeholder='步骤') }}
+                    {% for error in form.step.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
                 <div class="form-group">
                     <br>{{ form.child(class='form-control') }}
                 </div>
                 <div class="form-group">
-                    <br>{{ form.child_desc(class='form-control', placeholder='Child标签', size=8) }}
+                    <br>{{ form.child_desc(class='form-control', placeholder='子类') }}
                 </div>
                 {% for error in form.child_desc.errors %}
                     <span class="text-danger">{{ error }}</span>
@@ -45,23 +59,18 @@
                     <br>{{ form.parent(class='form-control') }}
                 </div>
                 <div class="form-group">
-                    <br>{{ form.parent_desc(class='form-control', placeholder='Parent标签', size=9) }}
+                    <br>{{ form.parent_desc(class='form-control', placeholder='父类') }}
                 </div>
                 {% for error in form.parent_desc.errors %}
                     <span class="text-danger">{{ error }}</span>
                 {% endfor %}
                 <div class="form-group">
-                    <br>{{ form.branch(class='form-control', placeholder='顺序/条目', size=8) }}
+                    <br>{{ form.row(class='form-control', placeholder='行') }}
                 </div>
-                {% for error in form.branch.errors %}
+                {% for error in form.row.errors %}
                     <span class="text-danger">{{ error }}</span>
                 {% endfor %}
-                <div class="form-group">
-                    <br>{{ form.action(class='form-control') }}
-                </div>
-                {% for error in form.branch.errors %}
-                    <span class="text-danger">{{ error }}</span>
-                {% endfor %}
+
                 <div class="form-group">
                     <br>
                     <button class="btn btn-primary" type="submit">提交</button>
@@ -75,12 +84,11 @@
             </form>
             <br>
 
-            <div>
+            <div id="flash_message">
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}
-                            <br>
-                            <div class="alert alert-success">
+                            <div class="alert alert-success alert-dismissible fade in">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 {{ message }}
                             </div>
@@ -99,15 +107,17 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>键</th>
+                            <th>描述</th>
+                            <th>By</th>
+                            <th>表达式</th>
                             <th>值</th>
-                            <th>元素</th>
+                            <th>动作</th>
+                            <th>步骤</th>
                             <th>子项</th>
                             <th>子项描述</th>
                             <th>父项</th>
                             <th>父项描述</th>
-                            <th>顺序</th>
-                            <th>动作</th>
+                            <th>数据行</th>
                             <th>启用</th>
                             <th>通过</th>
                             <th>操作</th>
@@ -115,17 +125,19 @@
                         </thead>
                         <tbody>
                         {% for amp in amphetamine_list %}
-                            <tr>
-                                <th scope="row">{{ amp.id }}</th>
-                                <td contenteditable="true">{{ amp.page_key }}</td>
-                                <td contenteditable="true">{{ amp.page_value }}</td>
-                                <td contenteditable="true">{{ amp.element }}</td>
+                            <tr id="tr{{ amp.id }}">
+                                <td scope="row">{{ amp.id }}</td>
+                                <td contenteditable="true">{{ amp.element_desc }}</td>
+                                <td >{{ amp.by_element_type }}</td>
+                                <td contenteditable="true">{{ amp.element_key }}</td>
+                                <td contenteditable="true">{{ amp.element_value }}</td>
+                                <td >{{ amp.action }}</td>
+                                <td contenteditable="true">{{ amp.step }}</td>
                                 <td contenteditable="true">{{ amp.child }}</td>
                                 <td contenteditable="true">{{ amp.child_desc }}</td>
                                 <td contenteditable="true">{{ amp.parent }}</td>
                                 <td contenteditable="true">{{ amp.parent_desc }}</td>
-                                <td contenteditable="true">{{ amp.branch }}</td>
-                                <td>{{ amp.action }}</td>
+                                <td contenteditable="true">{{ amp.row }}</td>
                                 {% if amp.is_enable %}
                                     <td><a href="/update_case_enable/{{ amp.id }}" role="button"
                                            class="btn btn-success btn-xs">{{ amp.is_enable }}</a></td>
@@ -135,7 +147,7 @@
                                 {% endif %}
                                 <td>{{ amp.is_passed }}</td>
                                 <td>
-                                    <a href="#" role="button" class="btn btn-primary btn-xs">update</a>
+                                    <a onclick="updateTestCase(this)" role="button" class="btn btn-primary btn-xs">update</a>
                                     <a href="/delete_case/{{ amp.id }}" role="button" class="btn btn-danger btn-xs">delete</a>
                                 </td>
 
@@ -154,5 +166,5 @@
         </div>
 
     </div>
-    <script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/updateTestCase.js') }}"></script>
 {% endblock %}
