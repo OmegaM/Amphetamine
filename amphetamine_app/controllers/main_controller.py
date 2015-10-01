@@ -44,10 +44,10 @@ def add_case():
                                       )
             db.session.add(amphetamine)
             db.session.commit()
-            flash(u"添加成功")
+            flash(u"用例添加成功")
             return redirect(url_for('index'))
         else:
-            flash(u"添加失败")
+            flash(u"用例添加失败")
             return render_template('index.html', form=form)
     else:
         return redirect(url_for('index'))
@@ -61,11 +61,13 @@ def update_case_enable(id):
             case = db.session.query(Amphetamine).get(id)
             case.is_enable = not case.is_enable
             db.session.commit()
-            flash(u"修改成功")
+            flash(u"用例状态修改成功")
             return redirect(url_for('index'))
         except Exception, e:
             logger.debug("update case failed : " + e.message)
             db.session.rollback()
+            flash(u"用例状态修改失败")
+            return redirect(url_for('index'))
     return redirect(url_for('index'))
 
 

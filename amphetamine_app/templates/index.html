@@ -103,7 +103,7 @@
             <div>
                 {% if amphetamine_list %}
                     <table class="table table-hover table-condensed">
-                        <caption>CaseList</caption>
+                        <caption>TestCaseList</caption>
                         <thead>
                         <tr>
                             <th>#</th>
@@ -140,12 +140,16 @@
                                 <td contenteditable="true">{{ amp.row }}</td>
                                 {% if amp.is_enable %}
                                     <td><a href="/update_case_enable/{{ amp.id }}" role="button"
-                                           class="btn btn-success btn-xs">{{ amp.is_enable }}</a></td>
+                                           class="btn btn-success btn-xs">ON</a></td>
                                 {% else %}
                                     <td><a href="/update_case_enable/{{ amp.id }}" role="button"
-                                           class="btn btn-info btn-xs">{{ amp.is_enable }}</a></td>
+                                           class="btn btn-info btn-xs">OFF</a></td>
                                 {% endif %}
-                                <td>{{ amp.is_passed }}</td>
+                                {% if amp.is_passed %}
+                                    <td><span class="label label-danger">Yes</span></td>
+                                {% else %}
+                                    <td><span class="label label-danger">No</span></td>
+                                {% endif %}
                                 <td>
                                     <a onclick="updateTestCase(this)" role="button" class="btn btn-primary btn-xs">update</a>
                                     <a href="/delete_case/{{ amp.id }}" role="button" class="btn btn-danger btn-xs">delete</a>
