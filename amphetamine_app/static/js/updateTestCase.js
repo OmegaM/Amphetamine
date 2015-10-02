@@ -24,7 +24,9 @@ function updateTestCase(obj) {
     $.post('/update_test_case', testCaseObject, function (results) {
         //console.log(results.messages);
         //警告框HTML代码
-        var flashDivBegin = '<div class="alert alert-success alert-dismissible fade in">' +
+        var flashDivSuccessBegin = '<div class="alert alert-success alert-dismissible fade in">' +
+            '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+        var flashDivFailBegin = '<div class="alert alert-danger alert-dismissible fade in">' +
             '<button type="button" class="close" data-dismiss="alert">&times;</button>';
         var flashDivEnd = '</div>';
         //警告框div对象
@@ -32,11 +34,11 @@ function updateTestCase(obj) {
 
         if (results.status == "success") {
             flashMessageObj.append(
-                flashDivBegin +
+                flashDivSuccessBegin +
                 results.messages + flashDivEnd);
         } else {
             flashMessageObj.append(
-                flashDivBegin +
+                flashDivFailBegin +
                 results.messages + flashDivEnd);
         }
     });

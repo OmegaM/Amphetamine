@@ -90,11 +90,11 @@
 
             </form>
             <br>
-
+            <!--begin flash message-->
             <div id="flash_message">
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
+                {% with successes = get_flashed_messages(category_filter=["success"]) %}
+                    {% if successes %}
+                        {% for message in successes %}
                             <div class="alert alert-success alert-dismissible fade in">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 {{ message }}
@@ -102,15 +102,26 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
+                {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                    {% if errors %}
+                        {% for message in errors %}
+                            <div class="alert alert-danger alert-dismissible fade in">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
             </div>
+            <!--end flash message-->
 
-            <!--begin-->
+            <!--begin testcase list-->
             <br>
 
             <div>
                 {% if amphetamine_list %}
                     <table class="table table-hover table-condensed">
-                        <caption>TestCaseList<code>Editable</code></caption>
+                        <caption>TestCaseList &nbsp;<code>(Editable)</code></caption>
                         <thead>
                         <tr>
                             <th>#</th>
@@ -146,10 +157,12 @@
                                 <td name="parent_desc" contenteditable="true">{{ amp.parent_desc }}</td>
                                 <td name="row" contenteditable="true">{{ amp.row }}</td>
                                 {% if amp.is_enable %}
-                                    <td><a href="/update_case_enable/{{ amp.id }}" role="button"
+                                    <td><a href="/update_case_enable/{{ amp.id }}"
+                                           role="button"
                                            class="btn btn-success btn-xs">ON</a></td>
                                 {% else %}
-                                    <td><a href="/update_case_enable/{{ amp.id }}" role="button"
+                                    <td><a href="/update_case_enable/{{ amp.id }}"
+                                           role="button"
                                            class="btn btn-info btn-xs">OFF</a></td>
                                 {% endif %}
                                 {% if amp.is_passed %}
@@ -158,7 +171,7 @@
                                     <td><span class="label label-danger">No</span></td>
                                 {% endif %}
                                 <td>
-                                    <a onclick="updateTestCase(this)" role="button" class="btn btn-primary btn-xs">update</a>
+                                    <a onclick="updateTestCase(this);" role="button" class="btn btn-primary btn-xs">update</a>
                                     <a href="/delete_case/{{ amp.id }}" role="button" class="btn btn-danger btn-xs">delete</a>
                                 </td>
 
@@ -172,7 +185,7 @@
 
             </div>
 
-            <!--end-->
+            <!--end testcase list-->
 
         </div>
 

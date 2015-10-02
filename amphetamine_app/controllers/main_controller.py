@@ -21,8 +21,12 @@ from amphetamine_app.utils import amphetamineUtils
 @amphetamine_app.route('/index')
 def index():
     form = EditTestCaseForm()
-    amphetamine_list = db.session.query(Amphetamine).order_by(Amphetamine.parent, Amphetamine.id).all()
-    return render_template('index.html', form=form, amphetamine_list=amphetamine_list)
+    try:
+        amphetamine_list = db.session.query(Amphetamine).order_by(Amphetamine.parent, Amphetamine.id).all()
+        return render_template('index.html', form=form, amphetamine_list=amphetamine_list)
+    except Exception, e:
+        logger.error("query all testcase list failed : " + e.message)
+        return render_template('index.html', form=form)
 
 
 @amphetamine_app.route('/add_case', methods=['GET', 'POST'])
@@ -46,15 +50,15 @@ def add_case():
             try:
                 db.session.add(amphetamine)
                 db.session.commit()
-                flash(u"用例添加成功")
+                flash(u'用例添加成功', 'success')
                 return redirect(url_for('index'))
             except Exception, e:
                 logger.error("add testcase failed : " + e.message)
                 db.session.rollback();
-                flash(u"用例添加失败")
+                flash(u'用例添加失败', 'error')
                 return redirect(url_for('index'))
         else:
-            flash(u"输入的表单含有错误项")
+            flash(u'输入的表单含有错误项')
             return render_template('index.html', form=form, amphetamine_list=amphetamine_list)
     return redirect(url_for('index'))
 
@@ -66,12 +70,12 @@ def update_case_enable(id):
             case = db.session.query(Amphetamine).get(id)
             case.is_enable = not case.is_enable
             db.session.commit()
-            flash(u"用例状态修改成功")
+            flash(u'用例状态修改成功', 'success')
             return redirect(url_for('index'))
         except Exception, e:
             logger.error("update testcase status failed : " + e.message)
             db.session.rollback()
-            flash(u"用例状态修改失败")
+            flash(u'用例状态修改失败', 'error')
             return redirect(url_for('index'))
     return redirect(url_for('index'))
 
@@ -108,11 +112,16 @@ def delete_case(id):
             case = db.session.query(Amphetamine).get(id)
             db.session.delete(case)
             db.session.commit()
-            flash(u"删除用例成功")
+            flash(u'删除用例成功', 'success')
             return redirect(url_for('index'))
         except Exception, e:
             logger.debug("delete testcase failed : " + e.message)
             db.session.rollback()
-            lash(u"删除用例失败")
+            lash(u'删除用例失败', 'error')
             return redirect(url_for('index'))
     return redirect(url_for('index'))
+
+
+@amphetamine_app.errorhandler(404)
+def not_found(error):
+    return render_template('errors/404.html'), 404
