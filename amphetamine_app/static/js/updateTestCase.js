@@ -21,7 +21,7 @@ function updateTestCase(obj) {
 
     //console.log(testCaseObject);
 
-    $.post('/update_test_case', testCaseObject, function (results) {
+    $.post('/update_testcase', testCaseObject, function (results) {
         //console.log(results.messages);
         //警告框HTML代码
         var flashDivSuccessBegin = '<div class="alert alert-success alert-dismissible fade in">' +
