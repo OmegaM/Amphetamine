@@ -56,7 +56,7 @@ def add_testcase():
                 db.session.add(amphetamine)
                 db.session.commit()
                 flash(u'用例添加成功', 'success')
-                return redirect(url_for('edit_testcase'))
+                return redirect(url_for('edit_testcase')), 201
             except Exception, e:
                 logger.error("add testcase failed : " + e.message)
                 db.session.rollback();
