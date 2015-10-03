@@ -20,7 +20,6 @@ from flask.ext.mail import Mail
 
 
 loginManager = LoginManager()
-loginManager.session_protection = 'strong'
 
 amphetamine_app = Flask(__name__)
 amphetamine_app.config.from_object(config['dev'])
@@ -38,4 +37,5 @@ logger.setLevel(logging.DEBUG)
 mail = Mail(amphetamine_app)
 
 from controllers.main_controller import amphetamine_app
-from models.mian_model import Anphetamine
+from controllers.show_testcase_controller import amphetamine_app
+from models.mian_model import Amphetamine
