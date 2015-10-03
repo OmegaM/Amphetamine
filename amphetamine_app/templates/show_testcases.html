@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Show Testcases</title>
+{% endblock %}
+{% import "_macros.html" as macros %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            {% if testcases %}
+                <table class="table table-hover table-condensed">
+                <caption>TestCaseList &nbsp;<code>(Readonly)</code></caption>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>描述</th>
+                    <th>期望值</th>
+                    <th>动作</th>
+                    <th>步骤</th>
+                    <th>子项描述</th>
+                    <th>父项描述</th>
+                    <th>数据行</th>
+                    <th>启用</th>
+                    <th>通过</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for testcase in testcases %}
+                    <tr>
+                        <th>{{ testcase.id }}</th>
+                        <td>{{ testcase.element_desc }}</td>
+                        <td>{{ testcase.element_value }}</td>
+                        <td>{{ testcase.action }}</td>
+                        <td>{{ testcase.step }}</td>
+                        <td>{{ testcase.child_desc }}</td>
+                        <td>{{ testcase.parent_desc }}</td>
+                        <td>{{ testcase.row }}</td>
+                        {% if testcase.is_enable %}
+                            <td><span class="label label-success">{{ testcase.is_enable }}</span></td>
+                        {% else %}
+                            <td><span class="label label-danger">{{ testcase.is_enable }}</span></td>
+                        {% endif %}
+                        <td>{{ testcase.is_passed }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+
+            {% else %}
+                <h1>No Testcase in here</h1>
+            {% endif %}
+
+            <!--begin footer-->
+            {% block footer %}
+                <div class="footer text-center">
+                    <div class="pagination">
+                        {{ macros.pagination_widget(pagination, 'show_testcases') }}
+                    </div>
+                </div>
+            {% endblock %}
+            <!--end footer-->
+        </div>
+
+    </div>
+{% endblock %}

@@ -12,3 +12,5 @@
 
 
 ActionType = ['READ', 'CLICK', 'INPUT']
+
+ByElementType = ['ID', 'NAME', 'XPATH']
