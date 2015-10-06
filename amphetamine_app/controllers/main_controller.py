@@ -40,18 +40,20 @@ def add_testcase():
     amphetamine_list = db.session.query(Amphetamine).order_by(Amphetamine.parent, Amphetamine.id).all()
     if request.method == 'POST':
         if form.validate_on_submit():
-            amphetamine = Amphetamine(element_desc=form.element_desc.data,
-                                      element_key=form.element_key.data,
-                                      element_value=form.element_value.data,
-                                      by_element_type=form.by_element_type.data,
-                                      action=form.action.data,
-                                      step=form.step.data,
-                                      child=form.child.data,
-                                      child_desc=form.child_desc.data,
-                                      parent=form.parent.data,
-                                      parent_desc=form.parent_desc.data,
-                                      row=form.row.data
-                                      )
+            # amphetamine = Amphetamine(element_desc=form.element_desc.data,
+            #                           element_key=form.element_key.data,
+            #                           element_value=form.element_value.data,
+            #                           by_element_type=form.by_element_type.data,
+            #                           action=form.action.data,
+            #                           step=form.step.data,
+            #                           child=form.child.data,
+            #                           child_desc=form.child_desc.data,
+            #                           parent=form.parent.data,
+            #                           parent_desc=form.parent_desc.data,
+            #                           row=form.row.data
+            #
+            amphetamine = Amphetamine()
+            form.populate_obj(amphetamine)  # 使用form的数据直接写入amphetamine对象
             try:
                 db.session.add(amphetamine)
                 db.session.commit()
@@ -88,19 +90,30 @@ def update_case_enable(id):
 @amphetamine_app.route('/update_testcase', methods=['POST'])
 def update_testcase():
     if request.method == 'POST':
-        print request.form.items()
+        # print request.form.items()
         testCaseDict = amphetamineUtils.jsListToPythonDict(request.form.items())
         try:
             testcase = db.session.query(Amphetamine).get(testCaseDict.get('id'))
-            testcase.element_desc = testCaseDict.get('element_desc')
-            testcase.element_key = testCaseDict.get('element_key')
-            testcase.element_value = testCaseDict.get('element_value')
-            testcase.step = testCaseDict.get('step')
-            testcase.child = testCaseDict.get('child')
-            testcase.child_desc = testCaseDict.get('child_desc')
-            testcase.parent = testCaseDict.get('parent')
-            testcase.parent_desc = testCaseDict.get('parent_desc')
-            testcase.row = testCaseDict.get('row')
+            if testcase.element_desc != testCaseDict.get('element_desc'):
+                testcase.element_desc = testCaseDict.get('element_desc')
+            if testcase.element_key != testCaseDict.get('element_key'):
+                testcase.element_key = testCaseDict.get('element_key')
+            if testcase.element_value != testCaseDict.get('element_value'):
+                testcase.element_value = testCaseDict.get('element_value')
+            if testcase.step != testCaseDict.get('step'):
+                testcase.step = testCaseDict.get('step')
+            if testcase.child != testCaseDict.get('child'):
+                testcase.child = testCaseDict.get('child')
+            if testcase.child_desc != testCaseDict.get('child_desc'):
+                testcase.child_desc = testCaseDict.get('child_desc')
+            if testcase.parent != testCaseDict.get('parent'):
+                testcase.parent = testCaseDict.get('parent')
+            if testcase.parent_desc != testCaseDict.get('parent_desc'):
+                testcase.parent_desc = testCaseDict.get('parent_desc')
+            if testcase.row != testCaseDict.get('row'):
+                testcase.row = testCaseDict.get('row')
+            # db.session.add(amphetamineUtils.updateChangeField(testcase, testCaseDict))
+            # testcase = amphetamineUtils.updateChangeField(testcase, testCaseDict)
             db.session.commit()
             return jsonify(status='success', messages=u'用例更新成功')
         except Exception, e:
