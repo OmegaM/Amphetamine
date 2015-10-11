@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Show Testcases</title>
+{% endblock %}
+{% import "_macros.html" as macros %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            {% if testsuite_list %}
+                <table class="table table-hover table-condensed">
+                    <caption>TestSuite &nbsp;<code>(Readonly)</code></caption>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>用例描述</th>
+                        <th>父模块</th>
+                        <th>子模块</th>
+                        <th>动作</th>
+                        <th>导出</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for testsiute in testsuite_list %}
+                        {% set outer_loop = loop %}
+                        <tr>
+                            <th>{{ outer_loop.index }}</th>
+                            <td>{{ testsiute.element_desc }}</td>
+                            <td>{{ testsiute.parent_desc }}</td>
+                            <td>{{ testsiute.child_desc }}</td>
+                            <td><a role="button" class="btn btn-info btn-xs" href="#">运行</a></td>
+                            <td><a role="button" class="btn btn-primary btn-xs" href="#">导出测试结果</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            {% else %}
+                <h1>No TestSuite in here</h1>
+            {% endif %}
+
+            <!--begin footer-->
+
+            <!--end footer-->
+        </div>
+
+    </div>
+{% endblock %}
