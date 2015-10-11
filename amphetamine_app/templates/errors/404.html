@@ -7,6 +7,15 @@
         </div>
         <div class="col-md-10 text-center">
             <h1 class="text-danger" style="margin-top: 15%">404 Not Found</h1>
+
+            <p>{% with errors = get_flashed_messages(category_filter=["error"]) %}
+                {% if errors %}
+                    {% for message in errors %}
+                        {{ message }}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </p>
             <br>
             <a href="/">返回主页</a>
         </div>

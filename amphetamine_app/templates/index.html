@@ -1,14 +1,48 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="jumbotron">
-        <div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="text-danger">Amphetamine</h1>
 
+                    <p>FSO Automation</p>
 
-            <h1 class="text-danger">Amphetamine</h1>
+                    <p><a class="btn btn-info btn-lg" href="{{ url_for('edit_testcase') }}" role="button">Edit
+                        Testcase</a></p>
+                </div>
+            </div>
 
-            <p>FSO Automation</p>
-
-            <p><a class="btn btn-info btn-lg" href="{{ url_for('edit_testcase') }}" role="button">Edit Testcase</a></p>
         </div>
+        <!--begin tab show-->
+        <div class="col-md-5">
+
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#editPage">EditPage</a></li>
+                <li><a data-toggle="tab" href="#listPage">ListPage</a></li>
+                <li><a data-toggle="tab" href="#otherPage">OtherPage</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="editPage" class="tab-pane fade in active">
+                    <h3>Edit TestCase</h3>
+                    <img height="90%" width="90%" src="{{ url_for('static', filename='img/edittestcase.png') }}">
+                </div>
+                <div id="listPage" class="tab-pane fade">
+                    <h3>List TestCase</h3>
+
+                    <img height="90%" width="90%" src="{{ url_for('static', filename='img/showtestcase.png') }}">
+                </div>
+                <div id="otherPage" class="tab-pane fade">
+                    <h3>Other Page</h3>
+
+                    <p>info info info</p>
+                </div>
+            </div>
+
+        </div>
+
     </div>
+
 {% endblock %}
