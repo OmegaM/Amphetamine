@@ -38,4 +38,5 @@ mail = Mail(amphetamine_app)
 
 from controllers.main_controller import amphetamine_app
 from controllers.show_testcase_controller import amphetamine_app
+from controllers.error_controller import amphetamine_app
 from models.mian_model import Amphetamine
