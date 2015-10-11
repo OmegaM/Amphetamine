@@ -6,9 +6,9 @@
         <title>Amphetamine</title>
     {% endblock %}
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrapValidator.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% assets "bootstrap_css" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
 </head>
 <body>
 {% block navbar %}
@@ -46,11 +46,12 @@
     {% block content %}
     {% endblock %}
 </div>
-<script src="{{ url_for('static', filename = 'js/jquery.js') }}"></script>
-<script src="{{ url_for('static', filename = 'js/updateTestCase.js') }}"></script>
-<script src="{{ url_for('static', filename = 'js/jquery.json.min.js') }}"></script>
-<script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
-<script src="{{ url_for('static', filename = 'js/bootstrapValidator.min.js') }}"></script>
-<script src="{{ url_for('static', filename = 'js/ampValidation.js') }}"></script>
+{% assets "bootstrap_js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% assets "feature_js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+
 </body>
 </html>
