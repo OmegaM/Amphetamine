@@ -11,8 +11,8 @@
 """
 
 from flask import jsonify, request, render_template, redirect, flash, url_for, abort
-from amphetamine_app import amphetamine_app, logger, db
-from amphetamine_app.models.mian_model import Amphetamine
+from .. import amphetamine_app, logger, db
+from ..models.mian_model import Amphetamine
 
 PER_PAGE = 10
 
@@ -31,3 +31,10 @@ def show_testcases():
         # 错误消息通过'error'传递给前端模板的category_filter=['error']
         flash("Error message : " + e.message, 'error');
         abort(500)
+
+
+@amphetamine_app.route('/show_testsuite', methods=['GET', 'POST'])
+def show_testsuite():
+    testsuite_list = db.session.query(Amphetamine.element_desc, Amphetamine.parent_desc, Amphetamine.child_desc). \
+        group_by(Amphetamine.parent, Amphetamine.child).all()
+    return render_template('show_testsuite.html', testsuite_list=testsuite_list)

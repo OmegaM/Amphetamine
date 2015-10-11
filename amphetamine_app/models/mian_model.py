@@ -15,7 +15,7 @@ import common
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
-from amphetamine_app import db, loginManager, logger
+from .. import db, loginManager, logger
 
 
 class Amphetamine(db.Model):

@@ -36,6 +36,7 @@ logger.setLevel(logging.DEBUG)
 # mail
 mail = Mail(amphetamine_app)
 
+from controllers.index_controller import amphetamine_app
 from controllers.main_controller import amphetamine_app
 from controllers.show_testcase_controller import amphetamine_app
 from controllers.error_controller import amphetamine_app

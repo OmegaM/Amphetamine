@@ -11,7 +11,7 @@
 """
 
 from flask import render_template, flash
-from amphetamine_app import amphetamine_app
+from .. import amphetamine_app
 
 
 @amphetamine_app.errorhandler(404)

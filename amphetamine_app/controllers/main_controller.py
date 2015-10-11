@@ -12,16 +12,10 @@
 
 from flask import jsonify, request, render_template, redirect, flash, url_for
 
-from amphetamine_app import amphetamine_app, logger, db
-from amphetamine_app.forms.main_form import EditTestCaseForm
-from amphetamine_app.models.mian_model import Amphetamine
-from amphetamine_app.utils import amphetamineUtils
-
-
-@amphetamine_app.route('/')
-@amphetamine_app.route('/index')
-def index():
-    return render_template('index.html')
+from .. import amphetamine_app, logger, db
+from ..forms.main_form import EditTestCaseForm
+from ..models.mian_model import Amphetamine
+from ..utils import amphetamineUtils
 
 
 @amphetamine_app.route('/edit_testcase')
