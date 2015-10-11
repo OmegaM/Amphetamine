@@ -12,11 +12,10 @@
 
 
 import common
-from amphetamine_app import db, loginManager, logger
 from datetime import datetime
-# import signature package
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
+from amphetamine_app import db, loginManager, logger
 
 
 class Amphetamine(db.Model):

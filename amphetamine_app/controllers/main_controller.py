@@ -10,10 +10,11 @@
     main_controller.py
 """
 
+from flask import jsonify, request, render_template, redirect, flash, url_for
+
 from amphetamine_app import amphetamine_app, logger, db
 from amphetamine_app.forms.main_form import EditTestCaseForm
 from amphetamine_app.models.mian_model import Amphetamine
-from flask import jsonify, request, render_template, redirect, flash, url_for
 from amphetamine_app.utils import amphetamineUtils
 
 
