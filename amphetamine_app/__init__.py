@@ -17,6 +17,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from config import config
 from flask.ext.mail import Mail
+from flask_debugtoolbar import DebugToolbarExtension
 
 
 loginManager = LoginManager()
@@ -26,6 +27,7 @@ amphetamine_app.config.from_object(config['dev'])
 db = SQLAlchemy(amphetamine_app)
 loginManager.init_app(amphetamine_app)
 
+# init logger
 console = logging.StreamHandler()
 formatter = logging.Formatter('%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)s %(message)s')
 console.setFormatter(formatter)
@@ -35,6 +37,8 @@ logger.setLevel(logging.DEBUG)
 
 # mail
 mail = Mail(amphetamine_app)
+# debug toolbar
+toobar = DebugToolbarExtension(amphetamine_app)
 
 from controllers.index_controller import amphetamine_app
 from controllers.main_controller import amphetamine_app
