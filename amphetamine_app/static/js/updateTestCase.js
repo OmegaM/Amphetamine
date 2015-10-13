@@ -13,7 +13,7 @@ $(document).ready(function () {
         //找到绑定了点击事件的按钮的td标签的父级元素的父级元素tr
         //为表格的一行
         var tr = $(this).parent().parent();
-        var tds = tr.children("td")
+        var tds = tr.children("td");
 
         $(tds).each(function () {
             //过滤掉td子元素中含有a标签和没有name属性的标签

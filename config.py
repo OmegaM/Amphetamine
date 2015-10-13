@@ -21,7 +21,7 @@ class Config(object):
 
 
 class DevConfig(Config):
-
+    DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'mysql://root:@localhost/amphetamine'
 
 

@@ -35,6 +35,10 @@ def show_testcases():
 
 @amphetamine_app.route('/show_testsuite', methods=['GET', 'POST'])
 def show_testsuite():
-    testsuite_list = db.session.query(Amphetamine.element_desc, Amphetamine.parent_desc, Amphetamine.child_desc). \
+    testsuite_list = db.session.query(Amphetamine.parent,
+                                      Amphetamine.child,
+                                      Amphetamine.element_desc,
+                                      Amphetamine.parent_desc,
+                                      Amphetamine.child_desc). \
         group_by(Amphetamine.parent, Amphetamine.child).all()
     return render_template('show_testsuite.html', testsuite_list=testsuite_list)
