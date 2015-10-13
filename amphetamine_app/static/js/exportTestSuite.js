@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     exportTestSuiteButton.bind("click", function () {
 
-        var obj;
+        var obj = Object();
         var tr = $(this).parent().parent();
         var tds = tr.children("td");
         $(tds).each(function () {
