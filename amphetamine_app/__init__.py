@@ -27,9 +27,11 @@ amphetamine_app.config.from_object(config['dev'])
 db = SQLAlchemy(amphetamine_app)
 loginManager.init_app(amphetamine_app)
 
-# init logger
+# init logger with console
 console = logging.StreamHandler()
-file_handler = logging.FileHandler('logs/amp.log')
+
+# add file handler, only used for my mac...
+file_handler = logging.FileHandler(config['my_mac_abs_dir'])
 
 formatter = logging.Formatter('%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)s %(message)s')
 
@@ -37,7 +39,6 @@ console.setFormatter(formatter)
 file_handler.setFormatter(formatter)
 
 logger = amphetamine_app.logger
-# add logger
 
 logger.addHandler(console)
 logger.addHandler(file_handler)
