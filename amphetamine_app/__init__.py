@@ -29,7 +29,7 @@ loginManager.init_app(amphetamine_app)
 
 # init logger
 console = logging.StreamHandler()
-file_handler = logging.FileHandler('/logs/amp.log')
+file_handler = logging.FileHandler('logs/amp.log')
 
 formatter = logging.Formatter('%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)s %(message)s')
 
