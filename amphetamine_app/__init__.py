@@ -37,6 +37,7 @@ console.setFormatter(formatter)
 file_handler.setFormatter(formatter)
 
 logger = amphetamine_app.logger
+# add logger
 
 logger.addHandler(console)
 logger.addHandler(file_handler)
