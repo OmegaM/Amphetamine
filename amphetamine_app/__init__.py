@@ -29,16 +29,24 @@ loginManager.init_app(amphetamine_app)
 
 # init logger
 console = logging.StreamHandler()
+file_handler = logging.FileHandler('/logs/amp.log')
+
 formatter = logging.Formatter('%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)s %(message)s')
+
 console.setFormatter(formatter)
+file_handler.setFormatter(formatter)
+
 logger = amphetamine_app.logger
+
 logger.addHandler(console)
+logger.addHandler(file_handler)
+
 logger.setLevel(logging.DEBUG)
 
-# mail
+# init mail
 mail = Mail(amphetamine_app)
-# debug toolbar
-toobar = DebugToolbarExtension(amphetamine_app)
+# init debug toolbar
+toolbar = DebugToolbarExtension(amphetamine_app)
 
 from controllers.index_controller import amphetamine_app
 from controllers.main_controller import amphetamine_app
