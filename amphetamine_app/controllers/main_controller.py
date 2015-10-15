@@ -56,7 +56,7 @@ def add_testcase():
                 return redirect(url_for('edit_testcase'))
             except Exception, e:
                 logger.error("add testcase failed : " + e.message)
-                db.session.rollback();
+                db.session.rollback()
                 flash(u'用例添加失败', 'error')
                 return redirect(url_for('edit_testcase'))
         else:
@@ -130,6 +130,6 @@ def delete_testcase(id):
         except Exception, e:
             logger.debug("delete testcase failed : " + e.message)
             db.session.rollback()
-            lash(u'删除用例失败', 'error')
+            flash(u'删除用例失败', 'error')
             return redirect(url_for('edit_testcase'))
     return redirect(url_for('edit_testcase'))
