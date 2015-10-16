@@ -31,7 +31,7 @@ loginManager.init_app(amphetamine_app)
 console = logging.StreamHandler()
 
 # add file handler, only used for my mac...
-file_handler = logging.FileHandler(config['my_mac_abs_dir'])
+file_handler = logging.FileHandler(config['my_log_dir'])
 
 formatter = logging.Formatter('%(asctime)s %(filename)s [line:%(lineno)d] %(levelname)s %(message)s')
 
