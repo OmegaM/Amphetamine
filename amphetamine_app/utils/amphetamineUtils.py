@@ -25,7 +25,8 @@ bundles = {
     'feature_js': Bundle(
         'js/ampValidation.js',
         'js/updateTestCase.js',
-        'js/exportTestSuite.js'
+        'js/exportTestSuite.js',
+        'js/runTestSuite.js'
     ),
     'bootstrap_css': Bundle(
         'css/bootstrap.min.css',
