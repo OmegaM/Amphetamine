@@ -57,5 +57,5 @@ from controllers.error_controller import amphetamine_app
 from controllers.download_controller import amphetamine_app
 from controllers.run_testsuite_controller import amphetamine_app
 
-from .utils.amphetamineUtils import assets
+from .utils.resourcesBundleUtils import assets
 from models.mian_model import Amphetamine
