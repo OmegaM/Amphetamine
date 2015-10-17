@@ -11,39 +11,44 @@
         </div>
         <div class="col-md-10">
             {% if testsuite_list %}
-                <table class="table table-hover table-condensed">
-                    <caption>TestSuite &nbsp;<code>(Readonly)</code></caption>
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>用例描述</th>
-                        <th>父模块</th>
-                        <th>子模块</th>
-                        <th>选择运行</th>
-                        <th>导出</th>
+                <div>
+                    <table class="table table-hover table-condensed">
+                        <caption>TestSuite &nbsp;<code>(Readonly)</code></caption>
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>用例描述</th>
+                            <th>父模块</th>
+                            <th>子模块</th>
+                            <th>勾选运行</th>
+                            <th>导出</th>
 
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for testsiute in testsuite_list %}
-                        {% set outer_loop = loop %}
-                        <tr name="testSuiteTr">
-                            <th>{{ outer_loop.index }}</th>
-                            <td>{{ testsiute.element_desc }}</td>
-                            <td>{{ testsiute.parent_desc }}</td>
-                            <td hidden="hidden" name="parent">{{ testsiute.parent }}</td>
-                            <td>{{ testsiute.child_desc }}</td>
-                            <td hidden="hidden" name="child">{{ testsiute.child }}</td>
-                            <td><input name="isRun" type="checkbox"></td>
-                            <td>
-                                <a role="button" class="btn btn-primary btn-xs"
-                                   href="/export_testsuite_xls?parent={{ testsiute.parent }}&child={{ testsiute.child }}">导出测试结果</a>
-                            </td>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <a type="button" id="runTestSuiteButton" class="btn btn-success btn-lg">运行</a>
+                        </thead>
+                        <tbody>
+                        {% for testsiute in testsuite_list %}
+                            {% set outer_loop = loop %}
+                            <tr name="testSuiteTr">
+                                <th>{{ outer_loop.index }}</th>
+                                <td>{{ testsiute.element_desc }}</td>
+                                <td>{{ testsiute.parent_desc }}</td>
+                                <td hidden="hidden" name="parent">{{ testsiute.parent }}</td>
+                                <td>{{ testsiute.child_desc }}</td>
+                                <td hidden="hidden" name="child">{{ testsiute.child }}</td>
+                                <td><input name="isRun" type="checkbox"></td>
+                                <td>
+                                    <a role="button" class="btn btn-primary btn-xs"
+                                       href="/export_testsuite_xls?parent={{ testsiute.parent }}&child={{ testsiute.child }}">导出测试结果</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <a type="button" id="runTestSuiteButton" class="btn btn-success btn-lg">运行选择的用例集</a>
+                </div>
+
             {% else %}
                 <h1>No TestSuite in here</h1>
             {% endif %}

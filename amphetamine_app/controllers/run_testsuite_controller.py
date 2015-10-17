@@ -15,7 +15,6 @@ from flask import jsonify, request, make_response
 from sqlalchemy.sql import and_
 from .. import amphetamine_app, logger, db
 from ..models.mian_model import Amphetamine as Amp
-from ..utils import amphetamineUtils
 
 
 @amphetamine_app.route('/run_testsuite', methods=['POST'])
