@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <div>
-                            {{ form.element_key(class='form-control', size=35, placeholder='Exp') }}
+                            {{ form.element_key(class='form-control', size=35, placeholder='唯一标识') }}
                         </div>
                     </div>
                     <div class="form-group"><code>@And</code></div>
@@ -80,8 +80,9 @@
                 <br>
 
                 <div class="form-group">
-                    <button class="btn btn-primary" type="submit">提交</button>
+                    <button class="btn btn-success" type="submit">提交</button>
                 </div>
+                &nbsp;
                 <div class="form-group">
                     <button class="btn btn-danger" type="reset">重置</button>
                 </div>
@@ -95,6 +96,7 @@
                     {% if successes %}
                         {% for message in successes %}
                             <div class="alert alert-success alert-dismissible fade in">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 {{ message }}
                             </div>
@@ -105,6 +107,7 @@
                     {% if errors %}
                         {% for message in errors %}
                             <div class="alert alert-danger alert-dismissible fade in">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 {{ message }}
                             </div>
@@ -121,10 +124,10 @@
             <!--begin collapse-->
 
             <div class="panel-group" id="accordion">
-                <div class="panel panel-success">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
 
-                        <h4 class="panel-title text-right" >
+                        <h4 class="panel-title text-right">
 
 
                             <a data-toggle="collapse" data-parent="#accordion"
@@ -137,7 +140,7 @@
                     </div>
                     <div id="collapseTestCase" class="panel-collapse collapse in">
                         <div class="panel-body">
-                        <!--content-->
+                            <!--content-->
                             <div>
                                 {% if amphetamine_list %}
                                     <table class="table table-hover table-condensed">
@@ -209,11 +212,11 @@
                 </div>
             </div>
 
-                <!--end testcase list and collapse-->
-
-            </div>
+            <!--end testcase list and collapse-->
 
         </div>
+
+    </div>
 
 
 {% endblock %}
