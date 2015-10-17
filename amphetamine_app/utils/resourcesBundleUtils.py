@@ -10,7 +10,6 @@
     resourcesBundleUtils.py
 """
 
-
 from flask.ext.assets import Bundle, Environment
 from .. import amphetamine_app
 
@@ -18,7 +17,6 @@ bundles = {
     'bootstrap_js': Bundle(
         'js/jquery.js',
         'js/jquery.json.min.js',
-        'js/nmp.js',
         'js/bootstrap.min.js',
         'js/bootstrapValidator.min.js'
 
@@ -27,7 +25,8 @@ bundles = {
         'js/ampValidation.js',
         'js/updateTestCase.js',
         'js/exportTestSuite.js',
-        'js/runTestSuite.js'
+        'js/runTestSuite.js',
+        'js/commonWidgetPretty.js'
     ),
     'bootstrap_css': Bundle(
         'css/bootstrap.min.css',

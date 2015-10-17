@@ -117,74 +117,103 @@
             <!--begin testcase list-->
             <br>
 
-            <div>
-                {% if amphetamine_list %}
-                    <table class="table table-hover table-condensed">
-                        <caption>TestCaseList &nbsp;<code>(Editable)</code></caption>
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>描述</th>
-                            <th>By</th>
-                            <th>表达式</th>
-                            <th>值</th>
-                            <th>动作</th>
-                            <th>步骤</th>
-                            <th>子项</th>
-                            <th>子项描述</th>
-                            <th>父项</th>
-                            <th>父项描述</th>
-                            <th>数据行</th>
-                            <th>启用</th>
 
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for amp in amphetamine_list %}
-                            <tr id="tr{{ amp.id }}">
-                                <td name="id" scope="row">{{ amp.id }}</td>
-                                <td name="element_desc" contenteditable="true">{{ amp.element_desc }}</td>
-                                <td>{{ amp.by_element_type }}</td>
-                                <td name="element_key" contenteditable="true">{{ amp.element_key }}</td>
-                                <td name="element_value" contenteditable="true">{{ amp.element_value }}</td>
-                                <td>{{ amp.action }}</td>
-                                <td name="step" contenteditable="true">{{ amp.step }}</td>
-                                <td name="child" contenteditable="true">{{ amp.child }}</td>
-                                <td name="child_desc" contenteditable="true">{{ amp.child_desc }}</td>
-                                <td name="parent" contenteditable="true">{{ amp.parent }}</td>
-                                <td name="parent_desc" contenteditable="true">{{ amp.parent_desc }}</td>
-                                <td name="row" contenteditable="true">{{ amp.row }}</td>
-                                {% if amp.is_enable %}
-                                    <td><a href="/update_case_enable/{{ amp.id }}"
-                                           role="button"
-                                           class="btn btn-success btn-xs">ON</a></td>
+            <!--begin collapse-->
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+
+                        <h4 class="panel-title text-right" >
+
+
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseTestCase">
+                                <p style="float: left">TestCaseList</p>
+                                <span id="chevronSpan" class="glyphicon glyphicon-chevron-up"></span>
+                            </a>
+
+                        </h4>
+                    </div>
+                    <div id="collapseTestCase" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                        <!--content-->
+                            <div>
+                                {% if amphetamine_list %}
+                                    <table class="table table-hover table-condensed">
+                                        <caption><code>(Editable)</code></caption>
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>描述</th>
+                                            <th>By</th>
+                                            <th>表达式</th>
+                                            <th>值</th>
+                                            <th>动作</th>
+                                            <th>步骤</th>
+                                            <th>子项</th>
+                                            <th>子项描述</th>
+                                            <th>父项</th>
+                                            <th>父项描述</th>
+                                            <th>数据行</th>
+                                            <th>启用</th>
+
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for amp in amphetamine_list %}
+                                            <tr id="tr{{ amp.id }}">
+                                                <td name="id" scope="row">{{ amp.id }}</td>
+                                                <td name="element_desc"
+                                                    contenteditable="true">{{ amp.element_desc }}</td>
+                                                <td>{{ amp.by_element_type }}</td>
+                                                <td name="element_key" contenteditable="true">{{ amp.element_key }}</td>
+                                                <td name="element_value"
+                                                    contenteditable="true">{{ amp.element_value }}</td>
+                                                <td>{{ amp.action }}</td>
+                                                <td name="step" contenteditable="true">{{ amp.step }}</td>
+                                                <td name="child" contenteditable="true">{{ amp.child }}</td>
+                                                <td name="child_desc" contenteditable="true">{{ amp.child_desc }}</td>
+                                                <td name="parent" contenteditable="true">{{ amp.parent }}</td>
+                                                <td name="parent_desc" contenteditable="true">{{ amp.parent_desc }}</td>
+                                                <td name="row" contenteditable="true">{{ amp.row }}</td>
+                                                {% if amp.is_enable %}
+                                                    <td><a href="/update_case_enable/{{ amp.id }}"
+                                                           role="button"
+                                                           class="btn btn-success btn-xs">ON</a></td>
+                                                {% else %}
+                                                    <td><a href="/update_case_enable/{{ amp.id }}"
+                                                           role="button"
+                                                           class="btn btn-info btn-xs">OFF</a></td>
+                                                {% endif %}
+
+                                                <td>
+                                                    <a name="updateTestCase" role="button"
+                                                       class="btn btn-primary btn-xs">update</a>
+                                                    <a href="/delete_testcase/{{ amp.id }}" role="button"
+                                                       class="btn btn-danger btn-xs">delete</a>
+                                                </td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
                                 {% else %}
-                                    <td><a href="/update_case_enable/{{ amp.id }}"
-                                           role="button"
-                                           class="btn btn-info btn-xs">OFF</a></td>
+                                    <p>No any TestCase in here.</p>
                                 {% endif %}
 
-                                <td>
-                                    <a name="updateTestCase" role="button" class="btn btn-primary btn-xs">update</a>
-                                    <a href="/delete_testcase/{{ amp.id }}" role="button" class="btn btn-danger btn-xs">delete</a>
-                                </td>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                {% else %}
-                    <p>No any TestCase in here.</p>
-                {% endif %}
+                <!--end testcase list and collapse-->
 
             </div>
 
-            <!--end testcase list-->
-
         </div>
-
-    </div>
 
 
 {% endblock %}
