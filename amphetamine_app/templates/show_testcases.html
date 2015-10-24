@@ -2,64 +2,80 @@
 {% block title %}
     <title>Show Testcases</title>
 {% endblock %}
+{% import "_macros_category.html" as category_macros %}
 {% import "_macros.html" as macros %}
 {% block content %}
 
     <div class="row">
         <div class="col-md-12">
             {% if testcases %}
+
                 <table class="table table-hover table-condensed">
                     <caption>TestCase &nbsp;<code>(Readonly)</code></caption>
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>描述</th>
-                    <th>期望值</th>
-                    <th>动作</th>
-                    <th>步骤</th>
-                    <th>子项描述</th>
-                    <th>父项描述</th>
-                    <th>数据行</th>
-                    <th>启用</th>
-                    <th>通过</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for testcase in testcases %}
+                    <thead>
                     <tr>
-                        <th>{{ testcase.id }}</th>
-                        <td>{{ testcase.element_desc }}</td>
-                        <td>{{ testcase.element_value }}</td>
-                        <td>{{ testcase.action }}</td>
-                        <td>{{ testcase.step }}</td>
-                        <td>{{ testcase.child_desc }}</td>
-                        <td>{{ testcase.parent_desc }}</td>
-                        <td>{{ testcase.row }}</td>
-                        {% if testcase.is_enable %}
-                            <td><span class="label label-success">{{ testcase.is_enable }}</span></td>
-                        {% else %}
-                            <td><span class="label label-danger">{{ testcase.is_enable }}</span></td>
-                        {% endif %}
-                        <td>{{ testcase.is_passed }}</td>
+                        <th>#</th>
+                        <th>描述</th>
+                        <th>期望值</th>
+                        <th>动作</th>
+                        <th>步骤</th>
+                        <th>子项描述</th>
+                        <th>父项描述</th>
+                        <th>数据行</th>
+                        <th>启用</th>
+                        <th>通过</th>
                     </tr>
-                {% endfor %}
-                </tbody>
+                    </thead>
+                    <tbody>
+                    {% for testcase in testcases %}
+
+                        <tr>
+                            <th>{{ testcase.id }}</th>
+                            <td>{{ testcase.element_desc }}</td>
+                            <td>{{ testcase.element_value }}</td>
+                            <td>{{ testcase.action }}</td>
+                            <td>{{ testcase.step }}</td>
+                            <td>{{ testcase.child_desc }}</td>
+                            <td>{{ testcase.parent_desc }}</td>
+                            <td>{{ testcase.row }}</td>
+                            {% if testcase.is_enable %}
+                                <td><span class="label label-success">{{ testcase.is_enable }}</span></td>
+                            {% else %}
+                                <td><span class="label label-danger">{{ testcase.is_enable }}</span></td>
+                            {% endif %}
+                            <td>{{ testcase.is_passed }}</td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
                 </table>
+                <!--end web-->
+
+
+
 
             {% else %}
                 <h1>No TestCase in here</h1>
             {% endif %}
-
             <!--begin footer-->
             {% block footer %}
-                <div class="footer text-center">
-                    <div class="pagination">
-                        {{ macros.pagination_widget(pagination, 'show_testcases') }}
+                {% if category_flag %}
+                    <div class="footer text-center">
+                        <div class="pagination">
+                            {{ category_macros.pagination_widget(pagination, 'show_testcase_by_category', category_flag) }}
+                        </div>
                     </div>
-                </div>
+                {% else %}
+                    <div class="footer text-center">
+                        <div class="pagination">
+                            {{ macros.pagination_widget(pagination, 'show_testcases') }}
+                        </div>
+                    </div>
+                {% endif %}
             {% endblock %}
             <!--end footer-->
         </div>
 
     </div>
+
 {% endblock %}

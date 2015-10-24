@@ -21,6 +21,9 @@ class EditTestCaseForm(Form):
     validRequiredMessage = u"该字段为必填项"
     validMaxLengthMessage = u"超过了255个字符"
 
+    category = SelectField(label='Category',
+                           choices=[('WEB', 'web'), ('ANDROID', 'android'), ('IOS', 'ios')])
+
     element_desc = StringField(label='ElementDesc',
                            validators=[DataRequired(message=validRequiredMessage),
                                        Length(min=1, max=255, message=validMaxLengthMessage)])

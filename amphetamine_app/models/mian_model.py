@@ -24,6 +24,7 @@ class Amphetamine(db.Model):
 
     ActionType = common.ActionType
     ByElementType = common.ByElementType
+    Category = common.Category
 
     id = db.Column(db.Integer, primary_key=True)
     element_desc = db.Column(db.String(255), nullable=True, unique=False)
@@ -36,6 +37,7 @@ class Amphetamine(db.Model):
     child_desc = db.Column(db.String(255), nullable=True, unique=False)
     parent = db.Column(db.Integer, nullable=True, unique=False)
     parent_desc = db.Column(db.String(255), nullable=True, unique=False)
+    category = db.Column(db.Enum(*Category), nullable=False, default='WEB')
     row = db.Column(db.Integer, nullable=True, unique=False)
     is_enable = db.Column(db.Boolean, default=True)
     is_passed = db.Column(db.Boolean, default=False)
