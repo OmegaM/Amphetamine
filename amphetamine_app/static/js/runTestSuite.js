@@ -14,7 +14,8 @@ $(document).ready(function () {
 
             if ($(this).attr("name") == 'isRun' && $(this).prop("checked") == true){
                 console.log("hint");
-                var tr = $(this).parent().parent("tr[name='testSuiteTr']");
+                //下面由于添加了checkbox的父级标签label所以使用三个parent找到testSuiteTr
+                var tr = $(this).parent().parent().parent("tr[name='testSuiteTr']");
                 //console.log(tr);
                 $(tr.children("td")).each(function () {
                     if ($(this).attr("name") == 'parent'){

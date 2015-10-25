@@ -12,7 +12,7 @@
 </head>
 <body>
 {% block navbar %}
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapse" data-toggle="collapse"
@@ -25,27 +25,26 @@
                 <a class="navbar-brand" href="/">Home</a>
             </div>
             <div class="collapse navbar-collapse">
-
-
+                {#                <form class="navbar-form navbar-right" action="#" role="search">#}
+                {#                            <div class="form-group">#}
+                {#                                <div class="input-group">#}
+                {#                                    <input type="search" class="form-control" placeholder="Keyword">#}
+                {#                                    <span class="input-group-btn">#}
+                {#                                        <button type="submit" class="btn btn-sm">#}
+                {#                                            <span class="fui-search"></span>#}
+                {#                                        </button>#}
+                {#                                    </span>#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {##}
+                {#                        </form>#}
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <form class="navbar-form navbar-left" role="search">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="search" class="form-control" size="36" placeholder="Keyword">
-                                    <span class="input-group-btn">
-                                        <button type="submit" class="btn">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
 
-                        </form>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><span class="glyphicon glyphicon-align-left"></span></a>
+                           aria-expanded="false"><span class="fui-list"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ url_for('edit_testcase') }}">Edit TestCase</a></li>
                             <li><a href="{{ url_for('show_testcases') }}">Show TestCase</a></li>

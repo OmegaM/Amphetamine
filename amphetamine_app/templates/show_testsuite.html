@@ -20,7 +20,7 @@
                             <th>用例描述</th>
                             <th>父模块</th>
                             <th>子模块</th>
-                            <th>勾选运行</th>
+                            <th>是否运行</th>
                             <th>导出</th>
 
                         </tr>
@@ -36,7 +36,14 @@
                                 <td>{{ testsiute.child_desc }}</td>
                                 <td hidden="hidden" name="child">{{ testsiute.child }}</td>
                                 <td>
-                                    <input name="isRun" type="checkbox" class="custom-checkbox" data-toggle="checkbox">
+                                    <label class="checkbox" for="checkbox{{ outer_loop.index }}">
+                                        <input type="checkbox" id="checkbox{{ outer_loop.index }}"
+                                               data-toggle="checkbox" class="custom-checkbox" name="isRun">
+                                        <span class="icons">
+                                            <span class="icon-unchecked"></span>
+                                            <span class="icon-checked"></span>
+                                        </span>
+                                    </label>
                                 </td>
                                 <td>
                                     <a role="button" class="btn btn-primary btn-xs"

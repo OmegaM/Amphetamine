@@ -1,8 +1,15 @@
+/*控制flash message提示框的大小*/
 #flash_message {
-    width: 20%;
+    width: 30%;
     height: 30%;
 }
 
 body {
     padding-top: 76px;
+}
+
+/*控制flat-ui的checkbox与其他td中的内容对齐*/
+label[class="checkbox"] {
+    margin: 0 auto;
+    line-height: normal;
 }

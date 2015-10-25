@@ -2,39 +2,48 @@
 {% block title %}
     <title xmlns="http://www.w3.org/1999/html">Show Testcases</title>
 {% endblock %}
-{% import "_macros_category.html" as category_macros %}
+{% import "_macros_category.html" as category_macros %}<!--自定义按照分类的分页模板宏-->
 {% import "_macros.html" as macros %}
 {% block content %}
 
     <div class="row">
         <div class="col-md-12">
             <!--begin dropdown tab-->
-            <ul class="nav nav-pills">
-                <li class="dropdown active">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        用例分类
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="/show_testcases">All</a>
-                        </li>
-                        <li>
-                            <a href="/show_testcase_by_category/web">Web</a>
-                        </li>
-                        <li>
-                            <a href="/show_testcase_by_category/android">Android</a>
-                        </li>
-                        <li>
-                            <a href="/show_testcase_by_category/ios">IOS</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            {#            <ul class="nav nav-pills">#}
+            {#                <li class="dropdown active">#}
+            {#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">#}
+            {#                        用例分类#}
+            {#                        <b class="caret"></b>#}
+            {#                    </a>#}
+            {#                    <ul class="dropdown-menu">#}
+            {#                        <li>#}
+            {#                            <a href="/show_testcases">All</a>#}
+            {#                        </li>#}
+            {#                        <li>#}
+            {#                            <a href="/show_testcase_by_category/web">Web</a>#}
+            {#                        </li>#}
+            {#                        <li>#}
+            {#                            <a href="/show_testcase_by_category/android">Android</a>#}
+            {#                        </li>#}
+            {#                        <li>#}
+            {#                            <a href="/show_testcase_by_category/ios">IOS</a>#}
+            {#                        </li>#}
+            {#                    </ul>#}
+            {#                </li>#}
+            {#            </ul>#}
             <!--end dropdown tab-->
-            </br>
+            <div class="btn-toolbar">
+                <div class="btn-group">
+                    <a class="btn btn-primary btn-sm" href="{{ url_for('show_testcases') }}">All</a>
+                    <a class="btn btn-primary btn-sm" href="{{ url_for('show_testcase_by_category', category='web') }}">Web</a>
+                    <a class="btn btn-primary btn-sm"
+                       href="{{ url_for('show_testcase_by_category', category='android') }}">Android</a>
+                    <a class="btn btn-primary btn-sm" href="{{ url_for('show_testcase_by_category', category='ios') }}">IOS</a>
+                </div>
+            </div>
+            <br>
             {% if testcases %}
-
+                <!--begin table-->
                 <table class="table table-hover table-condensed">
                     <caption>TestCase &nbsp;<code>(Readonly)</code></caption>
                     <thead>
@@ -74,7 +83,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <!--end web-->
+                <!--end table-->
 
 
 
@@ -86,24 +95,19 @@
             {% block footer %}
                 {% if category_flag %}
                     <div class="footer text-center">
-                        <div class="pagination">
+                        <ul class="pagination">
                             {{ category_macros.pagination_widget(pagination, 'show_testcase_by_category', category_flag) }}
-                        </div>
+                        </ul>
                     </div>
                 {% else %}
                     <div class="footer text-center">
-                        <div class="pagination">
+                        <ul class="pagination">
                             {{ macros.pagination_widget(pagination, 'show_testcases') }}
-                        </div>
+                        </ul>
                     </div>
                 {% endif %}
-                </div>
-                </div>
-                <!--end tab-->
             {% endblock %}
-    <!--end footer-->
+            <!--end footer-->
+        </div>
     </div>
-
-    </div>
-
 {% endblock %}
