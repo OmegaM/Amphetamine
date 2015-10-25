@@ -43,9 +43,11 @@ $(document).ready(function () {
     function showUpdateTestCaseTips(state, message) {
         //警告框HTML代码
         var flashDivSuccessBegin = '<div name="myUpdateTestCaseAlter" class="alert alert-success alert-dismissible fade in">' +
-            '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>'+
+            '&nbsp;<button type="button" class="close" data-dismiss="alert">&times;</button>';
         var flashDivFailBegin = '<div name="myUpdateTestCaseAlter" class="alert alert-danger alert-dismissible fade in">' +
-            '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+                '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>'+
+            '&nbsp;<button type="button" class="close" data-dismiss="alert">&times;</button>';
         var flashDivEnd = '</div>';
         //警告框div对象
         var flashMessageObj = $("#flash_message");

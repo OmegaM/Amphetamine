@@ -26,7 +26,7 @@ bundles = {
         'js/updateTestCase.js',
         'js/exportTestSuite.js',
         'js/runTestSuite.js',
-        'js/commonWidgetPretty.js'
+        'js/commonWidgetPretty.js',
     ),
     'bootstrap_css': Bundle(
         'css/bootstrap.min.css',

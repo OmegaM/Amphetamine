@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-    <title>Show Testcases</title>
+    <title xmlns="http://www.w3.org/1999/html">Show Testcases</title>
 {% endblock %}
 {% import "_macros_category.html" as category_macros %}
 {% import "_macros.html" as macros %}
@@ -8,6 +8,31 @@
 
     <div class="row">
         <div class="col-md-12">
+            <!--begin dropdown tab-->
+            <ul class="nav nav-pills">
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        用例分类
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/show_testcases">All</a>
+                        </li>
+                        <li>
+                            <a href="/show_testcase_by_category/web">Web</a>
+                        </li>
+                        <li>
+                            <a href="/show_testcase_by_category/android">Android</a>
+                        </li>
+                        <li>
+                            <a href="/show_testcase_by_category/ios">IOS</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!--end dropdown tab-->
+            </br>
             {% if testcases %}
 
                 <table class="table table-hover table-condensed">
@@ -72,9 +97,12 @@
                         </div>
                     </div>
                 {% endif %}
+                </div>
+                </div>
+                <!--end tab-->
             {% endblock %}
-            <!--end footer-->
-        </div>
+    <!--end footer-->
+    </div>
 
     </div>
 
