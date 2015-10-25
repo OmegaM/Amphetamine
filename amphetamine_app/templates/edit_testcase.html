@@ -9,19 +9,27 @@
 
 
         <div class="col-md-12">
-            <br>
+
 
             <form id="addTestCaseForm" role="form" class="form-inline form-row" action="/add_testcase" method="POST">
                 {{ form.hidden_tag() }}
                 <fieldset>
-                    <legend>关键字</legend>
-
-                    <div class="form-group"><code>@Case</code></div>
+                    <legend>分类与描述</legend>
+                    <div class="form-group"><code>@Category</code></div>
+                    <div class="form-group">
+                        {{ form.category(class='form-control') }}
+                    </div>
+                    <div class="form-group"><code>@Description</code></div>
                     <div class="form-group">
                         <div>
-                            {{ form.element_desc(class='form-control', placeholder='用例描述') }}
+                            {{ form.element_desc(class='form-control', size=35, placeholder='用例描述') }}
                         </div>
                     </div>
+
+                </fieldset>
+                <br>
+                <fieldset>
+                    <legend>关键字与步骤</legend>
                     <div class="form-group"><code>@FindBy</code></div>
                     <div class="form-group">
                         <div>
@@ -41,16 +49,22 @@
                     <div class="form-group">
                         {{ form.element_value(class='form-control', placeholder='预期值') }}
                     </div>
-
-                </fieldset>
-                <br>
-                <fieldset>
-                    <legend>操作步骤</legend>
                     <div class="form-group"><code>@Step</code></div>
                     <div class="form-group">
                         {{ form.step(class='form-control', size=8, placeholder='操作步骤') }}
                     </div>
+
                 </fieldset>
+
+
+{#                <br>#}
+{#                <fieldset>#}
+{#                    <legend>操作步骤</legend>#}
+{#                    <div class="form-group"><code>@Step</code></div>#}
+{#                    <div class="form-group">#}
+{#                        {{ form.step(class='form-control', size=8, placeholder='操作步骤') }}#}
+{#                    </div>#}
+{#                </fieldset>#}
                 <br>
                 <fieldset>
                     <legend>归属</legend>
@@ -68,10 +82,7 @@
                     <div class="form-group">
                         {{ form.parent_desc(class='form-control', placeholder='父模块') }}
                     </div>
-                    <div class="form-group"><code>@Category</code></div>
-                    <div class="form-group">
-                        {{ form.category(class='form-control') }}
-                    </div>
+
 
                 </fieldset>
                 <br>
@@ -129,7 +140,7 @@
             <!--begin collapse-->
 
             <div class="panel-group" id="accordion">
-                <div class="panel panel-primary">
+                <div class="panel">
                     <div class="panel-heading">
 
                         <h4 class="panel-title text-right">

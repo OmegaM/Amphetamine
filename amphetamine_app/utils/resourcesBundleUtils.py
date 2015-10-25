@@ -17,8 +17,10 @@ bundles = {
     'bootstrap_js': Bundle(
         'js/jquery.js',
         'js/jquery.json.min.js',
-        'js/bootstrap.min.js',
-        'js/bootstrapValidator.min.js'
+        # 'js/bootstrap.min.js',
+        'js/bootstrapValidator.min.js',
+        'js/flat-ui.min.js'
+        # 'js/radiocheck.js'
 
     ),
     'feature_js': Bundle(
@@ -30,7 +32,8 @@ bundles = {
     ),
     'bootstrap_css': Bundle(
         'css/bootstrap.min.css',
-        'css/bootstrap-theme.css',
+        # 'css/bootstrap-theme.css',
+        'css/flat-ui.min.css',
         'css/bootstrapValidator.min.css',
         'css/main.css'
     )

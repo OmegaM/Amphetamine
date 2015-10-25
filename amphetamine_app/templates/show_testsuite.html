@@ -35,7 +35,9 @@
                                 <td hidden="hidden" name="parent">{{ testsiute.parent }}</td>
                                 <td>{{ testsiute.child_desc }}</td>
                                 <td hidden="hidden" name="child">{{ testsiute.child }}</td>
-                                <td><input name="isRun" type="checkbox"></td>
+                                <td>
+                                    <input name="isRun" type="checkbox" class="custom-checkbox" data-toggle="checkbox">
+                                </td>
                                 <td>
                                     <a role="button" class="btn btn-primary btn-xs"
                                        href="/export_testsuite_xls?parent={{ testsiute.parent }}&child={{ testsiute.child }}">导出测试结果</a>
