@@ -19,7 +19,8 @@ bundles = {
         'js/jquery.json.min.js',
         # 'js/bootstrap.min.js',
         'js/bootstrapValidator.min.js',
-        'js/flat-ui.min.js'
+        'js/flat-ui.min.js',
+        'js/plugins/bootstrap-treeview.min.js'
         # 'js/radiocheck.js'
 
     ),
@@ -29,6 +30,7 @@ bundles = {
         'js/exportTestSuite.js',
         'js/runTestSuite.js',
         'js/commonWidgetPretty.js',
+        'js/app/app.js'
     ),
     'bootstrap_css': Bundle(
         'css/bootstrap.min.css',
