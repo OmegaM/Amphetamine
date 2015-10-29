@@ -1,7 +1,17 @@
+body, button, input, select, table, textarea, h1, h2, h3, h4, h5, h6, fieldset, legend {
+    font-family: Microsoft YaHei, '宋体', Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    font-size: 12px;
+}
+
 /*控制flash message提示框的大小*/
 #flash_message {
     width: 30%;
-    height: 30%;
+    height: 20%;
+}
+
+small {
+    clear: both;
+    float: none;
 }
 
 body {

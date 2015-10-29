@@ -14,7 +14,7 @@ import StringIO
 from flask import jsonify, request, make_response
 from sqlalchemy.sql import and_
 from .. import amphetamine_app, logger, db
-from ..models.mian_model import Amphetamine as Amp
+from ..models.teststep_model import TestStep as Amp
 from ..utils.excelUtils import Excel, Style
 
 

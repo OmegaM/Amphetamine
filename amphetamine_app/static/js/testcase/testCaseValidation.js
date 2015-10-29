@@ -12,7 +12,7 @@ $(document).ready(function () {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            element_desc: {
+            platform: {
                 validators: {
                     notEmpty: {
                         message: '必填项'
@@ -24,7 +24,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            element_key: {
+            caseDescription: {
                 validators: {
                     notEmpty: {
                         message: '必填项'
@@ -36,7 +36,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            element_value: {
+            testSet: {
                 validators: {
                     notEmpty: {
                         message: '必填项'
@@ -48,17 +48,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            step: {
-                validators: {
-                    notEmpty: {
-                        message: '必填项'
-                    },
-                    integer: {
-                        message: '非整数'
-                    }
-                }
-            },
-            child_desc: {
+            projectId: {
                 validators: {
                     notEmpty: {
                         message: '必填项'
@@ -70,7 +60,7 @@ $(document).ready(function () {
                     }
                 }
             },
-            parent_desc: {
+            projectName: {
                 validators: {
                     notEmpty: {
                         message: '必填项'
@@ -81,16 +71,7 @@ $(document).ready(function () {
                         message: '超过字符限制'
                     }
                 }
-            },
-            row: {
-                validators: {
-                    notEmpty: {
-                        message: '必填项'
-                    },
-                    integer: {
-                        message: '非整数'
-                    }
-                }
+
             }
         }
     });

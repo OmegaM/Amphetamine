@@ -12,7 +12,8 @@
 
 from flask import jsonify, request, render_template, redirect, flash, url_for, abort
 from .. import amphetamine_app, logger, db
-from ..models.mian_model import Amphetamine
+from ..models.testcase_model import TestCase
+from ..models.teststep_model import TestStep
 
 PER_PAGE = 5
 
@@ -21,7 +22,7 @@ PER_PAGE = 5
 def show_testcases():
     page = request.args.get('page', 1, type=int)
     try:
-        pagination = Amphetamine.query.order_by(Amphetamine.id, Amphetamine.parent). \
+        pagination = TestStep.query.order_by(TestStep.id, TestStep.parent). \
             paginate(page, PER_PAGE, error_out=False)
         testcases = pagination.items
         # raise Exception("this is message, has been set an error message for my macbookpro")
@@ -29,7 +30,7 @@ def show_testcases():
     except Exception, e:
         logger.error("pagination query failed : " + e.message)
         # 错误消息通过'error'传递给前端模板的category_filter=['error']
-        flash("Error message : " + e.message, 'error');
+        flash("Error message : " + e.message, 'error')
         abort(500)
 
 

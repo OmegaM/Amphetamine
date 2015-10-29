@@ -51,11 +51,14 @@ mail = Mail(amphetamine_app)
 toolbar = DebugToolbarExtension(amphetamine_app)
 
 from controllers.index_controller import amphetamine_app
-from controllers.main_controller import amphetamine_app
-from controllers.show_testcase_controller import amphetamine_app
-from controllers.error_controller import amphetamine_app
-from controllers.download_controller import amphetamine_app
-from controllers.run_testsuite_controller import amphetamine_app
+# from controllers.main_controller import amphetamine_app
+# from controllers.show_testcase_controller import amphetamine_app
+# from controllers.error_controller import amphetamine_app
+# from controllers.download_controller import amphetamine_app
+# from controllers.run_testsuite_controller import amphetamine_app
+from controllers.edit_testcase_controller import amphetamine_app
+from controllers.edit_teststep_controller import amphetamine_app
 
 from .utils.resourcesBundleUtils import assets
-from models.mian_model import Amphetamine
+from models.testcase_model import TestCase
+from models.teststep_model import TestStep

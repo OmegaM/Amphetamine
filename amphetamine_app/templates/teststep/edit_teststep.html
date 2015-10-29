@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Edit TestStep</title>
+{% endblock %}
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-11">
+
+
+            <form id="addTestStepForm" role="form" class="form-inline form-row" action="/add_teststep" method="POST">
+                {{ form.hidden_tag() }}
+                <fieldset>
+                    <legend>测试用例归属</legend>
+                    <div class="form-group"><code>@TestCase</code></div>
+                    <div class="form-group form-group-sm">
+
+                        {{ form.testCaseId(class='form-control') }}
+                    </div>
+                    <div class="form-group"><code>@PageName</code></div>
+                    <div class="form-group form-group-sm">
+
+                        {{ form.pageName(class='form-control', placeholder='页面名') }}
+                    </div>
+
+                    <div class="form-group form-group-sm">
+                        <label class="form-group" for="pageObjectName"><code>@PageObjectName</code></label>
+                        {{ form.pageObjectName(class='form-control', placeholder='页面对象') }}
+                    </div>
+                </fieldset>
+                <br>
+                <fieldset>
+                    <legend>步骤关键字</legend>
+                    <div class="form-group"><code>@Step</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.step(class='form-control', size=2, placeholder='步骤') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@StepDesc</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.stepDescription(class='form-control', placeholder='描述') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@Type</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.byType(class='form-control') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@Exp</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.byExpression(class='form-control', size=38, placeholder='表达式') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@Act</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.actionKeyword(class='form-control') }}
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
+                <fieldset>
+                    <legend>测试环境数据</legend>
+                    <div class="form-group"><code>@TestData</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.testData(class='form-control', placeholder='测试数据') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@TestExpectValue</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.testExpectValue(class='form-control', placeholder='预期值') }}
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
+                <fieldset>
+                    <legend>正式环境数据</legend>
+                    <div class="form-group"><code>@OfficalData</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.officalData(class='form-control', placeholder='正式数据') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@OfficalExpectValue</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.officalExpectValue(class='form-control', placeholder='预期值') }}
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
+                <br>
+                <fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-success btn-xs" type="submit">提交</button>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <button class="btn btn-danger btn-xs" type="reset">重置</button>
+                    </div>
+                </fieldset>
+
+
+            </form>
+            <br>
+            <!--begin flash message-->
+            <div id="flash_message">
+                {% with successes = get_flashed_messages(category_filter=["success"]) %}
+                    {% if successes %}
+                        {% for message in successes %}
+                            <div class="alert alert-success alert-dismissible fade in">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                    {% if errors %}
+                        {% for message in errors %}
+                            <div class="alert alert-danger alert-dismissible fade in">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <!--end flash message-->
+
+            <!--begin testcase list-->
+            <br>
+
+
+            <!--begin bottom display-->
+
+            <!--begin collapse-->
+
+            <div class="panel-group" id="accordion">
+                <div class="panel">
+                    <div class="panel-heading">
+
+                        <h4 class="panel-title text-right">
+
+
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseWidget">
+                                <p style="float: left">TestStepList</p>
+                                <span id="chevronSpan" class="glyphicon glyphicon-chevron-up"></span>
+                            </a>
+
+                        </h4>
+                    </div>
+                    <div id="collapseWidget" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <!--content-->
+                            <div>
+                                {% if teststepList %}
+                                    <table class="table table-hover table-condensed table-responsive">
+                                        <caption><code>(Editable)</code></caption>
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>平台</th>
+                                            <th>用例号</th>
+                                            <th>页面</th>
+                                            <th>页面对象</th>
+                                            <th>步骤</th>
+                                            <th>步骤描述</th>
+                                            <th>ByType</th>
+                                            <th>表达式</th>
+                                            <th>动作</th>
+                                            <th>测试数据</th>
+                                            <th>期望值</th>
+                                            <th>正式数据</th>
+                                            <th>期望值</th>
+                                            <th>操作</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for teststep in teststepList %}
+                                            <tr id="tr{{ teststep.id }}">
+                                                <td name="id" scope="row">{{ teststep.id }}</td>
+                                                <td>{{ teststep.testcase.platform }}</td>
+                                                <td>{{ teststep.testcase.testCaseId }}</td>
+                                                <td name="pageName" contenteditable="true">{{ teststep.pageName }}</td>
+                                                <td name="pageObjectName"
+                                                    contenteditable="true">{{ teststep.pageObjectName }}</td>
+                                                <td name="step"
+                                                    contenteditable="true">{{ teststep.step }}</td>
+                                                <td name="stepDescription"
+                                                    contenteditable="true">{{ teststep.stepDescription }}</td>
+                                                <td name="byType"
+                                                    contenteditable="true">{{ teststep.byType }}</td>
+                                                <td name="byExpression"
+                                                    contenteditable="true">{{ teststep.byExpression }}</td>
+                                                <td name="actionKeyword"
+                                                    contenteditable="true">{{ teststep.actionKeyword }}</td>
+                                                <td name="testData"
+                                                    contenteditable="true">{{ teststep.testData }}</td>
+                                                <td name="testExpectValue"
+                                                    contenteditable="true">{{ teststep.testExpectValue }}</td>
+                                                <td name="officalData"
+                                                    contenteditable="true">{{ teststep.officalData }}</td>
+                                                <td name="officalExpectValue"
+                                                    contenteditable="true">{{ teststep.officalExpectValue }}</td>
+
+                                                <td>
+                                                    <a name="updateTestStep" role="button"
+                                                       class="btn btn-primary btn-xs">update</a>
+                                                    <a href="/delete_teststep/{{ teststep.id }}" role="button"
+                                                       class="btn btn-danger btn-xs">delete</a>
+                                                </td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p>No Any TestStep In Here.</p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--end teststep list and collapse-->
+
+        </div>
+        <!--end bottom display-->
+
+    </div>
+
+
+{% endblock %}

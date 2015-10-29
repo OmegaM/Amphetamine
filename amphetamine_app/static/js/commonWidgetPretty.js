@@ -4,7 +4,7 @@
 
 
 $(document).ready(function () {
-    var collapseTestcase = $('#collapseTestCase');
+    var collapseTestcase = $('#collapseWidget');
 
     collapseTestcase.on('hidden.bs.collapse', function () {
         //console.log($("#chevronSpan").attr("class"));

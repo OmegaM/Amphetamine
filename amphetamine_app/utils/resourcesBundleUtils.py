@@ -25,8 +25,10 @@ bundles = {
 
     ),
     'feature_js': Bundle(
-        'js/ampValidation.js',
-        'js/updateTestCase.js',
+        'js/testcase/testCaseValidation.js',
+        'js/teststep/testStepValidation.js',
+        'js/testcase/updateTestCase.js',
+        'js/teststep/updateTestStep.js',
         'js/exportTestSuite.js',
         'js/runTestSuite.js',
         'js/commonWidgetPretty.js',

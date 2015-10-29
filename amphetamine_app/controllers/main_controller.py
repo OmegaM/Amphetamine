@@ -13,8 +13,9 @@
 from flask import jsonify, request, render_template, redirect, flash, url_for
 
 from .. import amphetamine_app, logger, db
-from ..forms.main_form import EditTestCaseForm
-from ..models.mian_model import Amphetamine
+from ..forms.testcase_form import EditTestCaseForm
+from ..models.testcase_model import TestCase
+from ..models.teststep_model import TestStep
 from ..utils import amphetamineUtils
 
 

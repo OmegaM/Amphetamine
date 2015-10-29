@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Edit Testcase</title>
+{% endblock %}
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-md-1">
+            TestCase
+        </div>
+
+
+        <div class="col-md-10">
+
+
+            <form id="addTestCaseForm" role="form" class="form-inline form-row" action="/add_testcase" method="POST">
+                {{ form.hidden_tag() }}
+                <fieldset>
+                    <legend>平台和项目</legend>
+                    <div class="form-group"><code>@Platform</code></div>
+                    <div class="form-group form-group-sm">
+                        {{ form.platform(class='form-control') }}
+                    </div>
+                    <div class="form-group"><code>@ProjectId</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.projectId(class='form-control', placeholder='项目编号') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@ProjectName</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.projectName(class='form-control', placeholder='项目名称') }}
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
+                <fieldset>
+                    <legend>用例</legend>
+                    <div class="form-group"><code>@TestCaseId</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.testCaseId(class='form-control', size=10, placeholder='用例编号') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@TestCaseDescription</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.caseDescription(class='form-control', size=35, placeholder='用例描述') }}
+                        </div>
+                    </div>
+                    <div class="form-group"><code>@TestSet</code></div>
+                    <div class="form-group form-group-sm">
+                        <div>
+                            {{ form.testSet(class='form-control', placeholder='测试集') }}
+                        </div>
+                    </div>
+                </fieldset>
+
+                <br>
+                <br>
+                <fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-success btn-xs" type="submit">提交</button>
+                    </div>
+                    &nbsp;
+                    <div class="form-group">
+                        <button class="btn btn-danger btn-xs" type="reset">重置</button>
+                    </div>
+                </fieldset>
+
+
+            </form>
+            <br>
+            <!--begin flash message-->
+            <div id="flash_message">
+                {% with successes = get_flashed_messages(category_filter=["success"]) %}
+                    {% if successes %}
+                        {% for message in successes %}
+                            <div class="alert alert-success alert-dismissible fade in">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                    {% if errors %}
+                        {% for message in errors %}
+                            <div class="alert alert-danger alert-dismissible fade in">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <!--end flash message-->
+
+            <!--begin testcase list-->
+            <br>
+
+
+            <!--begin bottom display-->
+
+            <!--begin collapse-->
+
+            <div class="panel-group" id="accordion">
+                <div class="panel">
+                    <div class="panel-heading">
+
+                        <h4 class="panel-title text-right">
+
+
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseWidget">
+                                <p style="float: left">TestCaseList</p>
+                                <span id="chevronSpan" class="glyphicon glyphicon-chevron-up"></span>
+                            </a>
+
+                        </h4>
+                    </div>
+                    <div id="collapseWidget" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <!--content-->
+                            <div>
+                                {% if testcaseList %}
+                                    <table class="table table-hover table-condensed">
+                                        <caption><code>(Editable)</code></caption>
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>平台</th>
+                                            <th>项目编号</th>
+                                            <th>项目名称</th>
+                                            <th>用例编号</th>
+                                            <th>用例描述</th>
+                                            <th>测试集</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for testcase in testcaseList %}
+                                            <tr id="tr{{ testcase.id }}">
+                                                <td name="id" scope="row">{{ testcase.id }}</td>
+                                                <td>{{ testcase.platform }}</td>
+                                                <td name="projectId"
+                                                    contenteditable="true">{{ testcase.projectId }}</td>
+                                                <td name="projectName"
+                                                    contenteditable="true">{{ testcase.projectName }}</td>
+                                                <td name="testCaseId"
+                                                    contenteditable="true">{{ testcase.testCaseId }}</td>
+                                                <td name="caseDescription"
+                                                    contenteditable="true">{{ testcase.caseDescription }}</td>
+                                                <td name="testSet" contenteditable="true">{{ testcase.testSet }}</td>
+
+                                                <td>
+                                                    <a name="updateTestCase" role="button"
+                                                       class="btn btn-primary btn-xs">update</a>
+                                                    <a href="/delete_testcase/{{ testcase.id }}" role="button"
+                                                       class="btn btn-danger btn-xs">delete</a>
+                                                </td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p>No any TestCase in here.</p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--end testcase list and collapse-->
+
+        </div>
+        <!--end bottom display-->
+
+    </div>
+
+
+{% endblock %}
