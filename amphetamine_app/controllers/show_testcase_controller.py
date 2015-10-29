@@ -18,15 +18,15 @@ from ..models.teststep_model import TestStep
 PER_PAGE = 5
 
 
-@amphetamine_app.route('/show_testcases', methods=['GET'])
-def show_testcases():
+@amphetamine_app.route('/show_all_testcase', methods=['GET'])
+def show_all_testcase():
     page = request.args.get('page', 1, type=int)
     try:
-        pagination = TestStep.query.order_by(TestStep.id, TestStep.parent). \
+        pagination = TestCase.query.order_by(TestCase.id, TestCase.testCaseId). \
             paginate(page, PER_PAGE, error_out=False)
         testcases = pagination.items
         # raise Exception("this is message, has been set an error message for my macbookpro")
-        return render_template('show_testcases.html', testcases=testcases, pagination=pagination)
+        return render_template('testcase/show_testcase.html', testcases=testcases, pagination=pagination)
     except Exception, e:
         logger.error("pagination query failed : " + e.message)
         # 错误消息通过'error'传递给前端模板的category_filter=['error']
@@ -37,24 +37,22 @@ def show_testcases():
 @amphetamine_app.route('/show_testcase_by_category/<string:category>')
 def show_testcase_by_category(category):
     page = request.args.get('page', 1, type=int)
-    print Amphetamine.query.filter(Amphetamine.category == category).all()
-    pagination = Amphetamine.query.filter(Amphetamine.category == category). \
-        order_by(Amphetamine.id, Amphetamine.parent).paginate(page, PER_PAGE, error_out=False)
+    pagination = TestCase.query.filter(TestCase.platform == category). \
+        order_by(TestCase.id, TestCase.testCaseId).paginate(page, PER_PAGE, error_out=False)
     testcases = pagination.items
     # raise Exception("this is message, has been set an error message for my macbookpro")
     category_flag = category
-    return render_template('show_testcases.html',
+    return render_template('testcase/show_testcase.html',
                            testcases=testcases,
                            pagination=pagination,
                            category_flag=category_flag)
 
-
-@amphetamine_app.route('/show_testsuite', methods=['GET', 'POST'])
-def show_testsuite():
-    testsuite_list = db.session.query(Amphetamine.parent,
-                                      Amphetamine.child,
-                                      Amphetamine.element_desc,
-                                      Amphetamine.parent_desc,
-                                      Amphetamine.child_desc). \
-        group_by(Amphetamine.parent, Amphetamine.child).all()
-    return render_template('show_testsuite.html', testsuite_list=testsuite_list)
+# @amphetamine_app.route('/show_testsuite', methods=['GET', 'POST'])
+# def show_testsuite():
+#     testsuite_list = db.session.query(Amphetamine.parent,
+#                                       Amphetamine.child,
+#                                       Amphetamine.element_desc,
+#                                       Amphetamine.parent_desc,
+#                                       Amphetamine.child_desc). \
+#         group_by(Amphetamine.parent, Amphetamine.child).all()
+#     return render_template('show_testsuite.html', testsuite_list=testsuite_list)
