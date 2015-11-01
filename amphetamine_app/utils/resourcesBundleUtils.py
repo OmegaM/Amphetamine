@@ -32,6 +32,7 @@ bundles = {
         'js/exportTestSuite.js',
         'js/runTestSuite.js',
         'js/commonWidgetPretty.js',
+        'js/testcase/runTestCase.js',
         'js/app/app.js'
     ),
     'bootstrap_css': Bundle(

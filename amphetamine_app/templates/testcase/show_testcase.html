@@ -37,7 +37,7 @@
             <!--end dropdown tab-->
             <div class="btn-toolbar">
                 <div class="btn-group">
-                    <a class="btn btn-primary btn-xs" href="{{ url_for('show_all_testcase') }}">All</a>
+                    <a class="btn btn-primary btn-xs disabled" href="{{ url_for('show_all_testcase') }}">All</a>
                     <a class="btn btn-primary btn-xs" href="{{ url_for('show_testcase_by_category', category='web') }}">
                         Web
                     </a>
@@ -67,10 +67,10 @@
                     <tbody>
                     {% for testcase in testcases %}
                         {% set outer_loop = loop %}
-                        <tr>
+                        <tr class="testCaseTr">
                             <th>{{ testcase.id }}</th>
                             <td>{{ testcase.platform }}</td>
-                            <td>{{ testcase.testCaseId }}</td>
+                            <td class="testCaseId">{{ testcase.testCaseId }}</td>
                             <td>{{ testcase.caseDescription }}</td>
                             <td>{{ testcase.projectId }}</td>
                             <td>{{ testcase.projectName }}</td>
