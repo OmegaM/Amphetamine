@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>Show Testcases</title>
+{% endblock %}
+{% import "_macros_category.html" as category_macros %}<!--自定义按照分类的分页模板宏-->
+{% import "_macros.html" as macros %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-1">
+            left
+        </div>
+        <div class="col-md-11">
+            <div class="btn-toolbar">
+                <div class="btn-group">
+                    <a class="btn btn-primary btn-xs disabled" href="{{ url_for('show_all_teststep') }}">All</a>
+                    <a class="btn btn-primary btn-xs" href="{{ url_for('show_teststep_by_category', category='web') }}">
+                        Web
+                    </a>
+                    <a class="btn btn-primary btn-xs"
+                       href="{{ url_for('show_teststep_by_category', category='android') }}">Android
+                    </a>
+                    <a class="btn btn-primary btn-xs" href="{{ url_for('show_teststep_by_category', category='ios') }}">IOS</a>
+                </div>
+            </div>
+            <br>
+            {% if teststeps %}
+                <!--begin table-->
+                <table class="table table-hover table-condensed">
+                    <caption>TestCase &nbsp;<code>(Readonly)</code></caption>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>平台</th>
+                        <th>用例编号</th>
+                        <th>项目</th>
+                        <th>步骤</th>
+                        <th>步骤描述</th>
+                        <th>页面名</th>
+                        <th>页面对象</th>
+                        <th>步骤类型</th>
+                        <th>表达式</th>
+                        <th>动作</th>
+                        <th>测试数据</th>
+                        <th>期望值</th>
+                        <th>生产数据</th>
+                        <th>期望值</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for teststep in teststeps %}
+                        {% set outer_loop = loop %}
+                        <tr class="testCaseTr">
+                            <th>{{ teststep.id }}</th>
+                            <td>{{ teststep.testcase.platform }}</td>
+                            <td>{{ teststep.testcaseId }}</td>
+                            <td>{{ teststep.testcase.projectId }}</td>
+                            <td>{{ teststep.step }}</td>
+                            <td>{{ teststep.stepDescription }}</td>
+                            <td>{{ teststep.pageName }}</td>
+                            <td>{{ teststep.pageObjectName }}</td>
+                            <td>{{ teststep.byType }}</td>
+                            <td>{{ teststep.byExpression }}</td>
+                            <td>{{ teststep.actionKeyword }}</td>
+                            <td>{{ teststep.testData }}</td>
+                            <td>{{ teststep.testExpectValue }}</td>
+                            <td>{{ teststep.officalData }}</td>
+                            <td>{{ teststep.officalExpectValue }}</td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <!--end table-->
+
+            {% else %}
+                <h1>No TestCase in here</h1>
+            {% endif %}
+            <!--begin footer-->
+            {% block footer %}
+                {% if category_flag %}
+                    <div class="footer text-center">
+                        <ul class="pagination">
+                            {{ category_macros.pagination_widget(pagination, 'show_teststep_by_category', category_flag) }}
+                        </ul>
+                    </div>
+                {% else %}
+                    <div class="footer text-center">
+                        <ul class="pagination">
+                            {{ macros.pagination_widget(pagination, 'show_all_teststep') }}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endblock %}
+            <!--end footer-->
+        </div>
+    </div>
+{% endblock %}

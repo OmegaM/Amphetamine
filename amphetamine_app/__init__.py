@@ -60,6 +60,7 @@ from controllers.edit_testcase_controller import amphetamine_app
 from controllers.edit_teststep_controller import amphetamine_app
 from controllers.show_testcase_controller import amphetamine_app
 from controllers.run_testcase_controller import amphetamine_app
+from controllers.show_teststep_controller import amphetamine_app
 
 from .utils.resourcesBundleUtils import assets
 from models.teststep_model import TestStep
