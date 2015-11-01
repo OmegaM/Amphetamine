@@ -12,18 +12,6 @@ $(document).ready(function () {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            platform: {
-                validators: {
-                    notEmpty: {
-                        message: '必填项'
-                    },
-                    stringLength: {
-                        min: 1,
-                        max: 30,
-                        message: '超过字符限制'
-                    }
-                }
-            },
             caseDescription: {
                 validators: {
                     notEmpty: {

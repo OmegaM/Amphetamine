@@ -18,7 +18,7 @@ class TestStep(db.Model):
     __tablename__ = 'teststep'
 
     id = db.Column(db.Integer, primary_key=True)
-    testcaseId = db.Column(db.String, db.ForeignKey('testcase.testCaseId'))
+    testcaseId = db.Column(db.String(30), db.ForeignKey('testcase.testCaseId'))
     step = db.Column(db.Integer, nullable=False, unique=False)
     stepDescription = db.Column(db.String(255), nullable=True, unique=False)
     pageName = db.Column(db.String(30), nullable=False)

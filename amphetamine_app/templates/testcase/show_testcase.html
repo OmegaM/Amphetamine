@@ -38,9 +38,12 @@
             <div class="btn-toolbar">
                 <div class="btn-group">
                     <a class="btn btn-primary btn-xs" href="{{ url_for('show_all_testcase') }}">All</a>
-                    <a class="btn btn-primary btn-xs" href="{{ url_for('show_testcase_by_category', category='web') }}">Web</a>
+                    <a class="btn btn-primary btn-xs" href="{{ url_for('show_testcase_by_category', category='web') }}">
+                        Web
+                    </a>
                     <a class="btn btn-primary btn-xs"
-                       href="{{ url_for('show_testcase_by_category', category='android') }}">Android</a>
+                       href="{{ url_for('show_testcase_by_category', category='android') }}">Android
+                    </a>
                     <a class="btn btn-primary btn-xs" href="{{ url_for('show_testcase_by_category', category='ios') }}">IOS</a>
                 </div>
             </div>
@@ -88,9 +91,9 @@
                     </tbody>
                 </table>
                 <!--end table-->
-
+                <br>
                 <div>
-                    <a type="button" id="runTestCaseButton" class="btn btn-success btn-lg">运行选择的用例集</a>
+                    <a type="button" id="runTestCaseButton" class="btn btn-info btn-lg">运行选择的用例集</a>
                 </div>
 
             {% else %}

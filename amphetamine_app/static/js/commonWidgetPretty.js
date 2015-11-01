@@ -4,14 +4,14 @@
 
 
 $(document).ready(function () {
-    var collapseTestcase = $('#collapseWidget');
+    var collapseTestCase = $('#collapseWidget');
 
-    collapseTestcase.on('hidden.bs.collapse', function () {
+    collapseTestCase.on('hidden.bs.collapse', function () {
         //console.log($("#chevronSpan").attr("class"));
         $("#chevronSpan").attr("class", "glyphicon glyphicon-chevron-down");
     });
 
-    collapseTestcase.on('shown.bs.collapse', function () {
+    collapseTestCase.on('shown.bs.collapse', function () {
         //console.log($("#chevronSpan").attr("class"));
         $("#chevronSpan").attr("class", "glyphicon glyphicon-chevron-up");
     });

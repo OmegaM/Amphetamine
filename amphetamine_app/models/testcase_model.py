@@ -31,7 +31,7 @@ class TestCase(db.Model):
     createTime = db.Column(db.DateTime, default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     updateTime = db.Column(db.DateTime, default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
-    teststeps = db.relationship('TestStep', backref='testcase', lazy='dynamic')
+    teststeps = db.relationship('TestStep', backref='testcase', lazy='select')  # 使用subquery立即加载外键记录
 
     def __repr__(self):
         return "<TestCase  %r %r %r %r>" % (self.id, self.testCaseId, self.caseDescription, self.platform)
