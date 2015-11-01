@@ -10,6 +10,8 @@
     amphetamineUtils.py
 """
 
+import json
+
 
 def jsListToPythonDict(jsList):
     test_case = {}
@@ -17,6 +19,10 @@ def jsListToPythonDict(jsList):
     for item in jsList:
         test_case[item[0]] = item[1]
     return test_case
+
+
+def pythonObjectToJSON(obj):
+    return json.dumps(obj, default=lambda obj: obj.__dict__, indent=2)
 
 # def updateChangeField(object1, object2Dict):
 #     for key1 in object1.__dict__.keys():
