@@ -78,7 +78,8 @@
                             <td>
                                 <label class="checkbox" for="checkbox{{ outer_loop.index }}">
                                     <input type="checkbox" id="checkbox{{ outer_loop.index }}"
-                                           data-toggle="checkbox" class="custom-checkbox" name="isRun">
+                                           data-toggle="checkbox" class="custom-checkbox" name="isRun"
+                                           onclick="validCheckboxIsChecked()">
                                         <span class="icons">
                                             <span class="icon-unchecked"></span>
                                             <span class="icon-checked"></span>
@@ -92,9 +93,23 @@
                 </table>
                 <!--end table-->
                 <br>
+
                 <div>
-                    <a type="button" id="runTestCaseButton" class="btn btn-info btn-lg">运行选择的用例集</a>
+                    <form id="runTestCaseForm" role="form" class="form-inline form-row" action="#">
+                        <div class="form-group">
+                            <select class="form-control" id="env">
+                                <option value="TEST">TEST</option>
+                                <option value="OFFICIAL">OFFICIAL</option>
+                            </select>
+                        </div>
+                        &nbsp;
+                        <div class="form-group">
+                            <a type="button" id="runTestCaseButton" class="btn btn-info btn-lg disabled">运行选择的用例集</a>
+                        </div>
+
+                    </form>
                 </div>
+
 
             {% else %}
                 <h1>No TestCase in here</h1>

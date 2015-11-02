@@ -15,7 +15,7 @@ from .. import amphetamine_app, logger, db
 from ..models.testcase_model import TestCase
 from ..models.teststep_model import TestStep
 
-PER_PAGE = 5
+PER_PAGE = 25
 
 
 @amphetamine_app.route('/show_all_testcase', methods=['GET'])

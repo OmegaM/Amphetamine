@@ -5,7 +5,8 @@
 
 $(document).ready(function () {
     var inputCheckboxs = $("input[name='isRun']");
-    var testCaseArray = new Array();
+    var testCaseArray = [];
+    var selectEnv = $("#env");
 
     $("#runTestCaseButton").bind('click', function () {
         //console.log(inputCheckboxs);
@@ -25,11 +26,12 @@ $(document).ready(function () {
             }
         });
 
+        var env = selectEnv.val();
 
         $.ajax({
             type: 'POST',
             url: '/run_testcase',
-            data: JSON.stringify({runTestCaseArray: testCaseArray}),
+            data: JSON.stringify({runTestCaseArray: testCaseArray, env: env}),
             contentType: 'application/json;charset=UTF-8'
         });
         console.log(testCaseArray);

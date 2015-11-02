@@ -28,6 +28,7 @@ bundles = {
         'js/testcase/testCaseValidation.js',
         'js/teststep/testStepValidation.js',
         'js/testcase/updateTestCase.js',
+        'js/testcase/runTestCaseValidation.js',
         'js/teststep/updateTestStep.js',
         'js/exportTestSuite.js',
         'js/runTestSuite.js',
