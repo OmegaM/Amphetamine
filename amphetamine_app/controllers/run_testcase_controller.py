@@ -61,9 +61,11 @@ def run_testcase():
         #           "testcase": prerun_testcase_list}
         # print run_testcase_dict
         print presend_run_testcase_json
-        # headers = {'content-type': 'application/json;charset=UTF-8'}
-        # r = requests.post('http://127.0.0.1:5000/invoke', data=run_testcase_json, headers=headers)
-        # print r.text
+        headers = {'content-type': 'application/json;charset=UTF-8'}
+        r = requests.post('http://10.100.142.40:8084/AutoFso/receiveRequest.wu',
+                          data=presend_run_testcase_json,
+                          headers=headers)
+        print r.text
         return jsonify({"success": True})
 
 
